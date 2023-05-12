@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditStudentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -218,9 +222,13 @@
       <DependentUpon>SchoolModels.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminWindowVM.cs" />
+    <Compile Include="ViewModel\EditStudentsVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditStudentsWindow.xaml.cs">
+      <DependentUpon>EditStudentsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>

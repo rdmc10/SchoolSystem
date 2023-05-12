@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 using mvp3.Helpers;
 using System.Configuration;
 using mvp3.Model;
+using mvp3.View;
 
 namespace mvp3.ViewModel
 {
@@ -77,7 +78,8 @@ namespace mvp3.ViewModel
                     case 3:
                         break;
                     case 4:
-                        MessageBox.Show(usertype.ToString());
+                        AdminWindow adminWindow = new AdminWindow();
+                        adminWindow.ShowDialog();
                         break;
                 }
             }

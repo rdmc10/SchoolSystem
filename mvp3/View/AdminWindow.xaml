@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mvp3.View"
+        xmlns:vm="clr-namespace:mvp3.ViewModel"
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:AdminWindowVM/>
+    </Window.DataContext>
     <Grid>
-        <Button Content="Editare elevi" HorizontalAlignment="Left" Margin="72,30,0,0" VerticalAlignment="Top" Width="91"/>
-        <Button Content="Editare profesori" HorizontalAlignment="Left" Margin="72,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.949,1.601"/>
-        <Button Content="Gestionare clase" HorizontalAlignment="Left" Margin="72,130,0,0" VerticalAlignment="Top"/>
+        <Button Content="Editare elevi" Command="{Binding EditStudentsCommand}" HorizontalAlignment="Left" Margin="72,30,0,0" VerticalAlignment="Top" Width="91"/>
+        <Button Content="Editare profesori" Command="{Binding EditTeachersCommand}" HorizontalAlignment="Left" Margin="72,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.949,1.601"/>
+        <Button Content="Gestionare clase" Command="{Binding EditClassroomsCommand}" HorizontalAlignment="Left" Margin="72,130,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
