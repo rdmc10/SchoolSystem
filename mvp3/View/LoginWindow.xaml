@@ -4,9 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mvp3"
+        xmlns:vm="clr-namespace:mvp3.ViewModel"
+        xmlns:helper="clr-namespace:mvp3.Helpers"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
+        Title="Login" Height="600" Width="800">
+    <Window.DataContext>
+        <vm:LoginVM/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid>
+            <Button Content="Check DB Connection" Margin="168,124,0,410" Command="{Binding CheckConCommand}" FontSize="11" HorizontalAlignment="Left" Width="175" />
+            <Label Content="Username:" HorizontalAlignment="Left" Margin="16,231,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="UserNameText" Text="{Binding Username}"  HorizontalAlignment="Left" Height="26" Margin="121,231,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="295"/>
+            <Label Content="Password:" HorizontalAlignment="Left" Margin="16,292,0,0" VerticalAlignment="Top" Width="122"/>
+            <Button Content="Log in " HorizontalAlignment="Left" Margin="336,357,0,0" VerticalAlignment="Top" Width="80" Height="19" Command="{Binding LoginCommand}"/>
+            <PasswordBox  x:Name="PasswordText" helper:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="121,292,0,0" VerticalAlignment="Top" Width="295" PasswordChar="*" Height="26"/>
+        </Grid>
     </Grid>
 </Window>

@@ -38,15 +38,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +91,129 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\BaseVM.cs" />
+    <Compile Include="Helpers\PasswordBoxHelper.cs" />
+    <Compile Include="Model\ABSENCE.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AVERAGE.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CLASSROOM.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAbsencesForASubject_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAbsencesForStudentForSubject_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAbsencesPerClassroom_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllAbsencesForStudent_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllClassMasterClassroomLinks_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllClassrooms_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllMarks_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllSpecializations_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllStudentClassroomLinks_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllSubjectClassroomLinks_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllSubjects_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllSubjectTeacherLinks_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllTeacherClassroomLinks_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllUsers_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAllUserTypes_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetAveragesForStudent_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetClassMasterClassroom_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetMarksForASubject_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetMarksForStudent_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetStudentsFromClassroom_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetSubjectsForTeacherForSelectedClassroom_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetSubjectsFromClassroom_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetTeachersClassrooms_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetUnexcusedAbsencesForStudent_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetUnexcusedAbsencesPerClassroom_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\GetUser_Result.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MARK.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SchoolModels.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolModels.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SchoolModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SchoolModels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolModels.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SPECIALIZATION.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SUBJECT.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SUBJECT_CLASSROOM.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USER.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\USER_TYPE.cs">
+      <DependentUpon>SchoolModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -96,6 +237,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\SchoolModels.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SchoolModels.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\SchoolModels.edmx.diagram">
+      <DependentUpon>SchoolModels.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -109,7 +257,21 @@
     <Folder Include="Model\BussinessLogicLayer\" />
     <Folder Include="Model\DataAccessLayer\" />
     <Folder Include="Model\EntityLayer\" />
-    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\SchoolModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SchoolModels.edmx</DependentUpon>
+      <LastGenOutput>SchoolModels.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\SchoolModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SchoolModels.edmx</DependentUpon>
+      <LastGenOutput>SchoolModels.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,0 +1,1883 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ABSENCE">
+          <Key>
+            <PropertyRef Name="AbsenceId" />
+          </Key>
+          <Property Name="AbsenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="CanBeExcused" Type="bit" Nullable="false" />
+          <Property Name="Excused" Type="bit" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AVERAGE">
+          <Key>
+            <PropertyRef Name="AverageId" />
+          </Key>
+          <Property Name="AverageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLASS_MASTER_CLASSROOM">
+          <Key>
+            <PropertyRef Name="ClassMasterId" />
+            <PropertyRef Name="ClassroomId" />
+          </Key>
+          <Property Name="ClassMasterId" Type="int" Nullable="false" />
+          <Property Name="ClassroomId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLASSROOM">
+          <Key>
+            <PropertyRef Name="ClassroomId" />
+          </Key>
+          <Property Name="ClassroomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecializationId" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MARK">
+          <Key>
+            <PropertyRef Name="MarkId" />
+          </Key>
+          <Property Name="MarkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="Date" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="IsThesis" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SPECIALIZATION">
+          <Key>
+            <PropertyRef Name="SpecializationId" />
+          </Key>
+          <Property Name="SpecializationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STUDENT_CLASSROOM">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ClassroomId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="ClassroomId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUBJECT">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUBJECT_CLASSROOM">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+            <PropertyRef Name="ClassroomId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="ClassroomId" Type="int" Nullable="false" />
+          <Property Name="Thesis" Type="bit" />
+        </EntityType>
+        <EntityType Name="SUBJECT_TEACHER">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="TeacherId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TEACHER_CLASSROOM">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+            <PropertyRef Name="ClassroomId" />
+          </Key>
+          <Property Name="TeacherId" Type="int" Nullable="false" />
+          <Property Name="ClassroomId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER_TYPE">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CLASS_MASTER_CLASS_MASTER_CLASSROOM">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CLASS_MASTER_CLASSROOM" Type="Self.CLASS_MASTER_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CLASS_MASTER_CLASSROOM">
+              <PropertyRef Name="ClassMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLASSROOM_CLASS_MASTER_CLASSROOM1">
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CLASS_MASTER_CLASSROOM" Type="Self.CLASS_MASTER_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Principal>
+            <Dependent Role="CLASS_MASTER_CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLASSROOM_STUDENT_CLASSROOM">
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="STUDENT_CLASSROOM" Type="Self.STUDENT_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Principal>
+            <Dependent Role="STUDENT_CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLASSROOM_SUBJECT_CLASSROOM">
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SUBJECT_CLASSROOM" Type="Self.SUBJECT_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Principal>
+            <Dependent Role="SUBJECT_CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLASSROOM_TEACHER_CLASSROOM">
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TEACHER_CLASSROOM" Type="Self.TEACHER_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Principal>
+            <Dependent Role="TEACHER_CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPECIALIZATION_CLASSROOM">
+          <End Role="SPECIALIZATION" Type="Self.SPECIALIZATION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPECIALIZATION">
+              <PropertyRef Name="SpecializationId" />
+            </Principal>
+            <Dependent Role="CLASSROOM">
+              <PropertyRef Name="SpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_ABSENCE">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ABSENCE" Type="Self.ABSENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ABSENCE">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_MARK">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MARK" Type="Self.MARK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MARK">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_STUDENT_CLASSROOM">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="STUDENT_CLASSROOM" Type="Self.STUDENT_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="STUDENT_CLASSROOM">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_ABSENCE">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ABSENCE" Type="Self.ABSENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="ABSENCE">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_AVERAGE">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AVERAGE" Type="Self.AVERAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="AVERAGE">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_MARK">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MARK" Type="Self.MARK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="MARK">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_SUBJECT_CLASSROOM">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SUBJECT_CLASSROOM" Type="Self.SUBJECT_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="SUBJECT_CLASSROOM">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_SUBJECT_TEACHER">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SUBJECT_TEACHER" Type="Self.SUBJECT_TEACHER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="SUBJECT_TEACHER">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEACHER_SUBJECT_TEACHER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SUBJECT_TEACHER" Type="Self.SUBJECT_TEACHER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SUBJECT_TEACHER">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEACHER_TEACHER_CLASSROOM">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TEACHER_CLASSROOM" Type="Self.TEACHER_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TEACHER_CLASSROOM">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_AVERAGE">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AVERAGE" Type="Self.AVERAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AVERAGE">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_TYPE_USER">
+          <End Role="USER_TYPE" Type="Self.USER_TYPE" Multiplicity="1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_TYPE">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddAbsence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="date" Type="varchar" Mode="In" />
+          <Parameter Name="semester" Type="int" Mode="In" />
+          <Parameter Name="canBeExcused" Type="bit" Mode="In" />
+          <Parameter Name="excused" Type="bit" Mode="In" />
+          <Parameter Name="studentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddClassMasterClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classMasterId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="specializationId" Type="int" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="value" Type="int" Mode="In" />
+          <Parameter Name="date" Type="varchar" Mode="In" />
+          <Parameter Name="semester" Type="int" Mode="In" />
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="boolIsThesis" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="AddSpecialization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AddStudentClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddSubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="thesis" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="AddSubjectClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddSubjectTeacherLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="teacherId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddTeacherClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="teacherId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="typeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddUserType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteClassMasterClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classMasterId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="markId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSpecialization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="specializationId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteStudentClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSubjectClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSubjectTeacherLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="teacherId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteTeacherClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="teacherId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteUserType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ExcuseAbsence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="absenceId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAbsencesForASubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAbsencesForStudentForSubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="semester" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAbsencesPerClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllAbsencesForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="semester" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllClassMasterClassroomLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllClassrooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllMarks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllSpecializations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllStudentClassroomLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllSubjectClassroomLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllSubjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllSubjectTeacherLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllTeacherClassroomLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllUserTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAveragesForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetClassMasterClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="teacherId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetClassroomIdForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMarksForASubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMarksForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="semester" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStudentsFromClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSubjectsForTeacherForSelectedClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="teacherId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSubjectsFromClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTeachersClassrooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="teacherId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUnexcusedAbsencesForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="semester" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUnexcusedAbsencesPerClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetUserType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userTypeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MakeAverage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="semester" Type="int" Mode="In" />
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="studentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModifyClassMasterClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classMasterId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModifyClassroom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+          <Parameter Name="specializationId" Type="int" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifySpecialization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="specializationId" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifyStudentClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentId" Type="int" Mode="In" />
+          <Parameter Name="classroomId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModifySubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="subjectId" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="thesis" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ModifyUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModifyUserType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userTypeId" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="SchoolModelStoreContainer">
+          <EntitySet Name="ABSENCE" EntityType="Self.ABSENCE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AVERAGE" EntityType="Self.AVERAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLASS_MASTER_CLASSROOM" EntityType="Self.CLASS_MASTER_CLASSROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLASSROOM" EntityType="Self.CLASSROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARK" EntityType="Self.MARK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SPECIALIZATION" EntityType="Self.SPECIALIZATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STUDENT_CLASSROOM" EntityType="Self.STUDENT_CLASSROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBJECT" EntityType="Self.SUBJECT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBJECT_CLASSROOM" EntityType="Self.SUBJECT_CLASSROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBJECT_TEACHER" EntityType="Self.SUBJECT_TEACHER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEACHER_CLASSROOM" EntityType="Self.TEACHER_CLASSROOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_TYPE" EntityType="Self.USER_TYPE" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CLASS_MASTER_CLASS_MASTER_CLASSROOM" Association="Self.FK_CLASS_MASTER_CLASS_MASTER_CLASSROOM">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="CLASS_MASTER_CLASSROOM" EntitySet="CLASS_MASTER_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLASSROOM_CLASS_MASTER_CLASSROOM1" Association="Self.FK_CLASSROOM_CLASS_MASTER_CLASSROOM1">
+            <End Role="CLASSROOM" EntitySet="CLASSROOM" />
+            <End Role="CLASS_MASTER_CLASSROOM" EntitySet="CLASS_MASTER_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLASSROOM_STUDENT_CLASSROOM" Association="Self.FK_CLASSROOM_STUDENT_CLASSROOM">
+            <End Role="CLASSROOM" EntitySet="CLASSROOM" />
+            <End Role="STUDENT_CLASSROOM" EntitySet="STUDENT_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLASSROOM_SUBJECT_CLASSROOM" Association="Self.FK_CLASSROOM_SUBJECT_CLASSROOM">
+            <End Role="CLASSROOM" EntitySet="CLASSROOM" />
+            <End Role="SUBJECT_CLASSROOM" EntitySet="SUBJECT_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLASSROOM_TEACHER_CLASSROOM" Association="Self.FK_CLASSROOM_TEACHER_CLASSROOM">
+            <End Role="CLASSROOM" EntitySet="CLASSROOM" />
+            <End Role="TEACHER_CLASSROOM" EntitySet="TEACHER_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPECIALIZATION_CLASSROOM" Association="Self.FK_SPECIALIZATION_CLASSROOM">
+            <End Role="SPECIALIZATION" EntitySet="SPECIALIZATION" />
+            <End Role="CLASSROOM" EntitySet="CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_ABSENCE" Association="Self.FK_STUDENT_ABSENCE">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="ABSENCE" EntitySet="ABSENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_MARK" Association="Self.FK_STUDENT_MARK">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="MARK" EntitySet="MARK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_STUDENT_CLASSROOM" Association="Self.FK_STUDENT_STUDENT_CLASSROOM">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="STUDENT_CLASSROOM" EntitySet="STUDENT_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_ABSENCE" Association="Self.FK_SUBJECT_ABSENCE">
+            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="ABSENCE" EntitySet="ABSENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_AVERAGE" Association="Self.FK_SUBJECT_AVERAGE">
+            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="AVERAGE" EntitySet="AVERAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_MARK" Association="Self.FK_SUBJECT_MARK">
+            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="MARK" EntitySet="MARK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_SUBJECT_CLASSROOM" Association="Self.FK_SUBJECT_SUBJECT_CLASSROOM">
+            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="SUBJECT_CLASSROOM" EntitySet="SUBJECT_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_SUBJECT_TEACHER" Association="Self.FK_SUBJECT_SUBJECT_TEACHER">
+            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="SUBJECT_TEACHER" EntitySet="SUBJECT_TEACHER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEACHER_SUBJECT_TEACHER" Association="Self.FK_TEACHER_SUBJECT_TEACHER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="SUBJECT_TEACHER" EntitySet="SUBJECT_TEACHER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEACHER_TEACHER_CLASSROOM" Association="Self.FK_TEACHER_TEACHER_CLASSROOM">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="TEACHER_CLASSROOM" EntitySet="TEACHER_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_AVERAGE" Association="Self.FK_USER_AVERAGE">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="AVERAGE" EntitySet="AVERAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_TYPE_USER" Association="Self.FK_USER_TYPE_USER">
+            <End Role="USER_TYPE" EntitySet="USER_TYPE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ABSENCE">
+          <Key>
+            <PropertyRef Name="AbsenceId" />
+          </Key>
+          <Property Name="AbsenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="CanBeExcused" Type="Boolean" Nullable="false" />
+          <Property Name="Excused" Type="Boolean" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_STUDENT_ABSENCE" FromRole="ABSENCE" ToRole="USER" />
+          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_SUBJECT_ABSENCE" FromRole="ABSENCE" ToRole="SUBJECT" />
+        </EntityType>
+        <EntityType Name="AVERAGE">
+          <Key>
+            <PropertyRef Name="AverageId" />
+          </Key>
+          <Property Name="AverageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_SUBJECT_AVERAGE" FromRole="AVERAGE" ToRole="SUBJECT" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_AVERAGE" FromRole="AVERAGE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="CLASSROOM">
+          <Key>
+            <PropertyRef Name="ClassroomId" />
+          </Key>
+          <Property Name="ClassroomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecializationId" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SUBJECT_CLASSROOM" Relationship="Self.FK_CLASSROOM_SUBJECT_CLASSROOM" FromRole="CLASSROOM" ToRole="SUBJECT_CLASSROOM" />
+          <NavigationProperty Name="SPECIALIZATION" Relationship="Self.FK_SPECIALIZATION_CLASSROOM" FromRole="CLASSROOM" ToRole="SPECIALIZATION" />
+          <NavigationProperty Name="USERs" Relationship="Self.CLASS_MASTER_CLASSROOM" FromRole="CLASSROOM" ToRole="USER" />
+          <NavigationProperty Name="USERs1" Relationship="Self.STUDENT_CLASSROOM" FromRole="CLASSROOM" ToRole="USER" />
+          <NavigationProperty Name="USERs2" Relationship="Self.TEACHER_CLASSROOM" FromRole="CLASSROOM" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="MARK">
+          <Key>
+            <PropertyRef Name="MarkId" />
+          </Key>
+          <Property Name="MarkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="IsThesis" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_STUDENT_MARK" FromRole="MARK" ToRole="USER" />
+          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_SUBJECT_MARK" FromRole="MARK" ToRole="SUBJECT" />
+        </EntityType>
+        <EntityType Name="SPECIALIZATION">
+          <Key>
+            <PropertyRef Name="SpecializationId" />
+          </Key>
+          <Property Name="SpecializationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CLASSROOMs" Relationship="Self.FK_SPECIALIZATION_CLASSROOM" FromRole="SPECIALIZATION" ToRole="CLASSROOM" />
+        </EntityType>
+        <EntityType Name="SUBJECT">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ABSENCEs" Relationship="Self.FK_SUBJECT_ABSENCE" FromRole="SUBJECT" ToRole="ABSENCE" />
+          <NavigationProperty Name="AVERAGEs" Relationship="Self.FK_SUBJECT_AVERAGE" FromRole="SUBJECT" ToRole="AVERAGE" />
+          <NavigationProperty Name="MARKs" Relationship="Self.FK_SUBJECT_MARK" FromRole="SUBJECT" ToRole="MARK" />
+          <NavigationProperty Name="SUBJECT_CLASSROOM" Relationship="Self.FK_SUBJECT_SUBJECT_CLASSROOM" FromRole="SUBJECT" ToRole="SUBJECT_CLASSROOM" />
+          <NavigationProperty Name="USERs" Relationship="Self.SUBJECT_TEACHER" FromRole="SUBJECT" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="SUBJECT_CLASSROOM">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+            <PropertyRef Name="ClassroomId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="ClassroomId" Type="Int32" Nullable="false" />
+          <Property Name="Thesis" Type="Boolean" />
+          <NavigationProperty Name="CLASSROOM" Relationship="Self.FK_CLASSROOM_SUBJECT_CLASSROOM" FromRole="SUBJECT_CLASSROOM" ToRole="CLASSROOM" />
+          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_SUBJECT_SUBJECT_CLASSROOM" FromRole="SUBJECT_CLASSROOM" ToRole="SUBJECT" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ABSENCEs" Relationship="Self.FK_STUDENT_ABSENCE" FromRole="USER" ToRole="ABSENCE" />
+          <NavigationProperty Name="AVERAGEs" Relationship="Self.FK_USER_AVERAGE" FromRole="USER" ToRole="AVERAGE" />
+          <NavigationProperty Name="MARKs" Relationship="Self.FK_STUDENT_MARK" FromRole="USER" ToRole="MARK" />
+          <NavigationProperty Name="USER_TYPE" Relationship="Self.FK_USER_TYPE_USER" FromRole="USER" ToRole="USER_TYPE" />
+          <NavigationProperty Name="CLASSROOMs" Relationship="Self.CLASS_MASTER_CLASSROOM" FromRole="USER" ToRole="CLASSROOM" />
+          <NavigationProperty Name="CLASSROOMs1" Relationship="Self.STUDENT_CLASSROOM" FromRole="USER" ToRole="CLASSROOM" />
+          <NavigationProperty Name="SUBJECTs" Relationship="Self.SUBJECT_TEACHER" FromRole="USER" ToRole="SUBJECT" />
+          <NavigationProperty Name="CLASSROOMs2" Relationship="Self.TEACHER_CLASSROOM" FromRole="USER" ToRole="CLASSROOM" />
+        </EntityType>
+        <EntityType Name="USER_TYPE">
+          <Key>
+            <PropertyRef Name="UserTypeId" />
+          </Key>
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USERs" Relationship="Self.FK_USER_TYPE_USER" FromRole="USER_TYPE" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_STUDENT_ABSENCE">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ABSENCE" Type="Self.ABSENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ABSENCE">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_ABSENCE">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ABSENCE" Type="Self.ABSENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="ABSENCE">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_AVERAGE">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AVERAGE" Type="Self.AVERAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="AVERAGE">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_AVERAGE">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AVERAGE" Type="Self.AVERAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AVERAGE">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLASSROOM_SUBJECT_CLASSROOM">
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SUBJECT_CLASSROOM" Type="Self.SUBJECT_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Principal>
+            <Dependent Role="SUBJECT_CLASSROOM">
+              <PropertyRef Name="ClassroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPECIALIZATION_CLASSROOM">
+          <End Role="SPECIALIZATION" Type="Self.SPECIALIZATION" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPECIALIZATION">
+              <PropertyRef Name="SpecializationId" />
+            </Principal>
+            <Dependent Role="CLASSROOM">
+              <PropertyRef Name="SpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_MARK">
+          <End Role="USER" Type="Self.USER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MARK" Type="Self.MARK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MARK">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_MARK">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MARK" Type="Self.MARK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="MARK">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECT_SUBJECT_CLASSROOM">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SUBJECT_CLASSROOM" Type="Self.SUBJECT_CLASSROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUBJECT">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="SUBJECT_CLASSROOM">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_TYPE_USER">
+          <End Role="USER_TYPE" Type="Self.USER_TYPE" Multiplicity="1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_TYPE">
+              <PropertyRef Name="UserTypeId" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLASS_MASTER_CLASSROOM">
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="*" />
+        </Association>
+        <Association Name="STUDENT_CLASSROOM">
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+        </Association>
+        <Association Name="SUBJECT_TEACHER">
+          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+        </Association>
+        <Association Name="TEACHER_CLASSROOM">
+          <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SchoolEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ABSENCEs" EntityType="Self.ABSENCE" />
+          <EntitySet Name="AVERAGEs" EntityType="Self.AVERAGE" />
+          <EntitySet Name="CLASSROOMs" EntityType="Self.CLASSROOM" />
+          <EntitySet Name="MARKs" EntityType="Self.MARK" />
+          <EntitySet Name="SPECIALIZATIONs" EntityType="Self.SPECIALIZATION" />
+          <EntitySet Name="SUBJECTs" EntityType="Self.SUBJECT" />
+          <EntitySet Name="SUBJECT_CLASSROOM" EntityType="Self.SUBJECT_CLASSROOM" />
+          <EntitySet Name="USERs" EntityType="Self.USER" />
+          <EntitySet Name="USER_TYPE" EntityType="Self.USER_TYPE" />
+          <AssociationSet Name="FK_STUDENT_ABSENCE" Association="Self.FK_STUDENT_ABSENCE">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="ABSENCE" EntitySet="ABSENCEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_ABSENCE" Association="Self.FK_SUBJECT_ABSENCE">
+            <End Role="SUBJECT" EntitySet="SUBJECTs" />
+            <End Role="ABSENCE" EntitySet="ABSENCEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_AVERAGE" Association="Self.FK_SUBJECT_AVERAGE">
+            <End Role="SUBJECT" EntitySet="SUBJECTs" />
+            <End Role="AVERAGE" EntitySet="AVERAGEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_AVERAGE" Association="Self.FK_USER_AVERAGE">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="AVERAGE" EntitySet="AVERAGEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLASSROOM_SUBJECT_CLASSROOM" Association="Self.FK_CLASSROOM_SUBJECT_CLASSROOM">
+            <End Role="CLASSROOM" EntitySet="CLASSROOMs" />
+            <End Role="SUBJECT_CLASSROOM" EntitySet="SUBJECT_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPECIALIZATION_CLASSROOM" Association="Self.FK_SPECIALIZATION_CLASSROOM">
+            <End Role="SPECIALIZATION" EntitySet="SPECIALIZATIONs" />
+            <End Role="CLASSROOM" EntitySet="CLASSROOMs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_MARK" Association="Self.FK_STUDENT_MARK">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="MARK" EntitySet="MARKs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_MARK" Association="Self.FK_SUBJECT_MARK">
+            <End Role="SUBJECT" EntitySet="SUBJECTs" />
+            <End Role="MARK" EntitySet="MARKs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECT_SUBJECT_CLASSROOM" Association="Self.FK_SUBJECT_SUBJECT_CLASSROOM">
+            <End Role="SUBJECT" EntitySet="SUBJECTs" />
+            <End Role="SUBJECT_CLASSROOM" EntitySet="SUBJECT_CLASSROOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_TYPE_USER" Association="Self.FK_USER_TYPE_USER">
+            <End Role="USER_TYPE" EntitySet="USER_TYPE" />
+            <End Role="USER" EntitySet="USERs" />
+          </AssociationSet>
+          <AssociationSet Name="CLASS_MASTER_CLASSROOM" Association="Self.CLASS_MASTER_CLASSROOM">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="CLASSROOM" EntitySet="CLASSROOMs" />
+          </AssociationSet>
+          <AssociationSet Name="STUDENT_CLASSROOM" Association="Self.STUDENT_CLASSROOM">
+            <End Role="CLASSROOM" EntitySet="CLASSROOMs" />
+            <End Role="USER" EntitySet="USERs" />
+          </AssociationSet>
+          <AssociationSet Name="SUBJECT_TEACHER" Association="Self.SUBJECT_TEACHER">
+            <End Role="SUBJECT" EntitySet="SUBJECTs" />
+            <End Role="USER" EntitySet="USERs" />
+          </AssociationSet>
+          <AssociationSet Name="TEACHER_CLASSROOM" Association="Self.TEACHER_CLASSROOM">
+            <End Role="CLASSROOM" EntitySet="CLASSROOMs" />
+            <End Role="USER" EntitySet="USERs" />
+          </AssociationSet>
+          <FunctionImport Name="AddAbsence">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="date" Mode="In" Type="String" />
+            <Parameter Name="semester" Mode="In" Type="Int32" />
+            <Parameter Name="canBeExcused" Mode="In" Type="Boolean" />
+            <Parameter Name="excused" Mode="In" Type="Boolean" />
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddClassMasterClassroomLink">
+            <Parameter Name="classMasterId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddClassroom">
+            <Parameter Name="specializationId" Mode="In" Type="Int32" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddMark">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="value" Mode="In" Type="Int32" />
+            <Parameter Name="date" Mode="In" Type="String" />
+            <Parameter Name="semester" Mode="In" Type="Int32" />
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="boolIsThesis" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddSpecialization">
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddStudentClassroomLink">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddSubject">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="thesis" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddSubjectClassroomLink">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddSubjectTeacherLink">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="teacherId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddTeacherClassroomLink">
+            <Parameter Name="teacherId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddUser">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="typeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddUserType">
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteClassMasterClassroomLink">
+            <Parameter Name="classMasterId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteClassroom">
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMark">
+            <Parameter Name="markId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSpecialization">
+            <Parameter Name="specializationId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteStudentClassroomLink">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSubject">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSubjectClassroomLink">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSubjectTeacherLink">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="teacherId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTeacherClassroomLink">
+            <Parameter Name="teacherId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUser">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUserType">
+            <Parameter Name="userTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ExcuseAbsence">
+            <Parameter Name="absenceId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAbsencesForASubject" ReturnType="Collection(SchoolModel.GetAbsencesForASubject_Result)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAbsencesForStudentForSubject" ReturnType="Collection(SchoolModel.GetAbsencesForStudentForSubject_Result)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="semester" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAbsencesPerClassroom" ReturnType="Collection(SchoolModel.GetAbsencesPerClassroom_Result)">
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllAbsencesForStudent" ReturnType="Collection(SchoolModel.GetAllAbsencesForStudent_Result)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="semester" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllClassMasterClassroomLinks" ReturnType="Collection(SchoolModel.GetAllClassMasterClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllClassrooms" ReturnType="Collection(SchoolModel.GetAllClassrooms_Result)" />
+          <FunctionImport Name="GetAllMarks" ReturnType="Collection(SchoolModel.GetAllMarks_Result)" />
+          <FunctionImport Name="GetAllSpecializations" ReturnType="Collection(SchoolModel.GetAllSpecializations_Result)" />
+          <FunctionImport Name="GetAllStudentClassroomLinks" ReturnType="Collection(SchoolModel.GetAllStudentClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllSubjectClassroomLinks" ReturnType="Collection(SchoolModel.GetAllSubjectClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllSubjects" ReturnType="Collection(SchoolModel.GetAllSubjects_Result)" />
+          <FunctionImport Name="GetAllSubjectTeacherLinks" ReturnType="Collection(SchoolModel.GetAllSubjectTeacherLinks_Result)" />
+          <FunctionImport Name="GetAllTeacherClassroomLinks" ReturnType="Collection(SchoolModel.GetAllTeacherClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllUsers" ReturnType="Collection(SchoolModel.GetAllUsers_Result)" />
+          <FunctionImport Name="GetAllUserTypes" ReturnType="Collection(SchoolModel.GetAllUserTypes_Result)" />
+          <FunctionImport Name="GetAveragesForStudent" ReturnType="Collection(SchoolModel.GetAveragesForStudent_Result)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetClassMasterClassroom" ReturnType="Collection(SchoolModel.GetClassMasterClassroom_Result)">
+            <Parameter Name="teacherId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetClassroomIdForStudent" ReturnType="Collection(Int32)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMarksForASubject" ReturnType="Collection(SchoolModel.GetMarksForASubject_Result)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMarksForStudent" ReturnType="Collection(SchoolModel.GetMarksForStudent_Result)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="semester" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentsFromClassroom" ReturnType="Collection(SchoolModel.GetStudentsFromClassroom_Result)">
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSubjectsForTeacherForSelectedClassroom" ReturnType="Collection(SchoolModel.GetSubjectsForTeacherForSelectedClassroom_Result)">
+            <Parameter Name="teacherId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSubjectsFromClassroom" ReturnType="Collection(SchoolModel.GetSubjectsFromClassroom_Result)">
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTeachersClassrooms" ReturnType="Collection(SchoolModel.GetTeachersClassrooms_Result)">
+            <Parameter Name="teacherId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnexcusedAbsencesForStudent" ReturnType="Collection(SchoolModel.GetUnexcusedAbsencesForStudent_Result)">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="semester" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUnexcusedAbsencesPerClassroom" ReturnType="Collection(SchoolModel.GetUnexcusedAbsencesPerClassroom_Result)">
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUser" ReturnType="Collection(SchoolModel.GetUser_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserType" ReturnType="Collection(String)">
+            <Parameter Name="userTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MakeAverage">
+            <Parameter Name="semester" Mode="In" Type="Int32" />
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyClassMasterClassroomLink">
+            <Parameter Name="classMasterId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyClassroom">
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+            <Parameter Name="specializationId" Mode="In" Type="Int32" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifySpecialization">
+            <Parameter Name="specializationId" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyStudentClassroomLink">
+            <Parameter Name="studentId" Mode="In" Type="Int32" />
+            <Parameter Name="classroomId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModifySubject">
+            <Parameter Name="subjectId" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="thesis" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyUser">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyUserType">
+            <Parameter Name="userTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAbsencesForASubject_Result">
+          <Property Type="Int32" Name="AbsenceId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Boolean" Name="CanBeExcused" Nullable="false" />
+          <Property Type="Boolean" Name="Excused" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAbsencesForStudentForSubject_Result">
+          <Property Type="Int32" Name="AbsenceId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Boolean" Name="CanBeExcused" Nullable="false" />
+          <Property Type="Boolean" Name="Excused" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAbsencesPerClassroom_Result">
+          <Property Type="Int32" Name="AbsenceId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Boolean" Name="CanBeExcused" Nullable="false" />
+          <Property Type="Boolean" Name="Excused" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllAbsencesForStudent_Result">
+          <Property Type="Int32" Name="AbsenceId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Boolean" Name="CanBeExcused" Nullable="false" />
+          <Property Type="Boolean" Name="Excused" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllClassMasterClassroomLinks_Result">
+          <Property Type="Int32" Name="ClassMasterId" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllClassrooms_Result">
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+          <Property Type="Int32" Name="SpecializationId" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllMarks_Result">
+          <Property Type="Int32" Name="MarkId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="Value" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="IsThesis" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetAllSpecializations_Result">
+          <Property Type="Int32" Name="SpecializationId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllStudentClassroomLinks_Result">
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllSubjectClassroomLinks_Result">
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+          <Property Type="Boolean" Name="Thesis" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAllSubjects_Result">
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllSubjectTeacherLinks_Result">
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="TeacherId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllTeacherClassroomLinks_Result">
+          <Property Type="Int32" Name="TeacherId" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllUsers_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllUserTypes_Result">
+          <Property Type="Int32" Name="UserTypeId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAveragesForStudent_Result">
+          <Property Type="Int32" Name="AverageId" Nullable="false" />
+          <Property Type="Double" Name="Value" Nullable="false" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetClassMasterClassroom_Result">
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+          <Property Type="Int32" Name="SpecializationId" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ClassMasterId" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId1" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetMarksForASubject_Result">
+          <Property Type="Int32" Name="MarkId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="Value" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="IsThesis" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetMarksForStudent_Result">
+          <Property Type="Int32" Name="MarkId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="Int32" Name="Value" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="IsThesis" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetStudentsFromClassroom_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetSubjectsForTeacherForSelectedClassroom_Result">
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Thesis" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSubjectsFromClassroom_Result">
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="SubjectId1" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+          <Property Type="Boolean" Name="Thesis" Nullable="true" />
+          <Property Type="Int32" Name="ClassroomId1" Nullable="false" />
+          <Property Type="Int32" Name="SpecializationId" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="String" Name="Name1" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetTeachersClassrooms_Result">
+          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
+          <Property Type="Int32" Name="SpecializationId" Nullable="false" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TeacherId" Nullable="false" />
+          <Property Type="Int32" Name="ClassroomId1" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetUnexcusedAbsencesForStudent_Result">
+          <Property Type="Int32" Name="AbsenceId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Boolean" Name="CanBeExcused" Nullable="false" />
+          <Property Type="Boolean" Name="Excused" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUnexcusedAbsencesPerClassroom_Result">
+          <Property Type="Int32" Name="AbsenceId" Nullable="false" />
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="Date" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Semester" Nullable="false" />
+          <Property Type="Boolean" Name="CanBeExcused" Nullable="false" />
+          <Property Type="Boolean" Name="Excused" Nullable="false" />
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUser_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UserTypeId" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer" CdmEntityContainer="SchoolEntities3">
+          <EntitySetMapping Name="ABSENCEs">
+            <EntityTypeMapping TypeName="SchoolModel.ABSENCE">
+              <MappingFragment StoreEntitySet="ABSENCE">
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="CanBeExcused" ColumnName="CanBeExcused" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AVERAGEs">
+            <EntityTypeMapping TypeName="SchoolModel.AVERAGE">
+              <MappingFragment StoreEntitySet="AVERAGE">
+                <ScalarProperty Name="AverageId" ColumnName="AverageId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLASSROOMs">
+            <EntityTypeMapping TypeName="SchoolModel.CLASSROOM">
+              <MappingFragment StoreEntitySet="CLASSROOM">
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARKs">
+            <EntityTypeMapping TypeName="SchoolModel.MARK">
+              <MappingFragment StoreEntitySet="MARK">
+                <ScalarProperty Name="MarkId" ColumnName="MarkId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="IsThesis" ColumnName="IsThesis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPECIALIZATIONs">
+            <EntityTypeMapping TypeName="SchoolModel.SPECIALIZATION">
+              <MappingFragment StoreEntitySet="SPECIALIZATION">
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBJECTs">
+            <EntityTypeMapping TypeName="SchoolModel.SUBJECT">
+              <MappingFragment StoreEntitySet="SUBJECT">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBJECT_CLASSROOM">
+            <EntityTypeMapping TypeName="SchoolModel.SUBJECT_CLASSROOM">
+              <MappingFragment StoreEntitySet="SUBJECT_CLASSROOM">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+                <ScalarProperty Name="Thesis" ColumnName="Thesis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="SchoolModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_TYPE">
+            <EntityTypeMapping TypeName="SchoolModel.USER_TYPE">
+              <MappingFragment StoreEntitySet="USER_TYPE">
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CLASS_MASTER_CLASSROOM" TypeName="SchoolModel.CLASS_MASTER_CLASSROOM" StoreEntitySet="CLASS_MASTER_CLASSROOM">
+            <EndProperty Name="USER">
+              <ScalarProperty Name="UserId" ColumnName="ClassMasterId" />
+            </EndProperty>
+            <EndProperty Name="CLASSROOM">
+              <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="STUDENT_CLASSROOM" TypeName="SchoolModel.STUDENT_CLASSROOM" StoreEntitySet="STUDENT_CLASSROOM">
+            <EndProperty Name="CLASSROOM">
+              <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+            </EndProperty>
+            <EndProperty Name="USER">
+              <ScalarProperty Name="UserId" ColumnName="StudentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SUBJECT_TEACHER" TypeName="SchoolModel.SUBJECT_TEACHER" StoreEntitySet="SUBJECT_TEACHER">
+            <EndProperty Name="SUBJECT">
+              <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+            </EndProperty>
+            <EndProperty Name="USER">
+              <ScalarProperty Name="UserId" ColumnName="TeacherId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TEACHER_CLASSROOM" TypeName="SchoolModel.TEACHER_CLASSROOM" StoreEntitySet="TEACHER_CLASSROOM">
+            <EndProperty Name="CLASSROOM">
+              <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+            </EndProperty>
+            <EndProperty Name="USER">
+              <ScalarProperty Name="UserId" ColumnName="TeacherId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="AddAbsence" FunctionName="SchoolModel.Store.AddAbsence" />
+          <FunctionImportMapping FunctionImportName="AddClassMasterClassroomLink" FunctionName="SchoolModel.Store.AddClassMasterClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddClassroom" FunctionName="SchoolModel.Store.AddClassroom" />
+          <FunctionImportMapping FunctionImportName="AddMark" FunctionName="SchoolModel.Store.AddMark" />
+          <FunctionImportMapping FunctionImportName="AddSpecialization" FunctionName="SchoolModel.Store.AddSpecialization" />
+          <FunctionImportMapping FunctionImportName="AddStudentClassroomLink" FunctionName="SchoolModel.Store.AddStudentClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddSubject" FunctionName="SchoolModel.Store.AddSubject" />
+          <FunctionImportMapping FunctionImportName="AddSubjectClassroomLink" FunctionName="SchoolModel.Store.AddSubjectClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddSubjectTeacherLink" FunctionName="SchoolModel.Store.AddSubjectTeacherLink" />
+          <FunctionImportMapping FunctionImportName="AddTeacherClassroomLink" FunctionName="SchoolModel.Store.AddTeacherClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddUser" FunctionName="SchoolModel.Store.AddUser" />
+          <FunctionImportMapping FunctionImportName="AddUserType" FunctionName="SchoolModel.Store.AddUserType" />
+          <FunctionImportMapping FunctionImportName="DeleteClassMasterClassroomLink" FunctionName="SchoolModel.Store.DeleteClassMasterClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteClassroom" FunctionName="SchoolModel.Store.DeleteClassroom" />
+          <FunctionImportMapping FunctionImportName="DeleteMark" FunctionName="SchoolModel.Store.DeleteMark" />
+          <FunctionImportMapping FunctionImportName="DeleteSpecialization" FunctionName="SchoolModel.Store.DeleteSpecialization" />
+          <FunctionImportMapping FunctionImportName="DeleteStudentClassroomLink" FunctionName="SchoolModel.Store.DeleteStudentClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteSubject" FunctionName="SchoolModel.Store.DeleteSubject" />
+          <FunctionImportMapping FunctionImportName="DeleteSubjectClassroomLink" FunctionName="SchoolModel.Store.DeleteSubjectClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteSubjectTeacherLink" FunctionName="SchoolModel.Store.DeleteSubjectTeacherLink" />
+          <FunctionImportMapping FunctionImportName="DeleteTeacherClassroomLink" FunctionName="SchoolModel.Store.DeleteTeacherClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="SchoolModel.Store.DeleteUser" />
+          <FunctionImportMapping FunctionImportName="DeleteUserType" FunctionName="SchoolModel.Store.DeleteUserType" />
+          <FunctionImportMapping FunctionImportName="ExcuseAbsence" FunctionName="SchoolModel.Store.ExcuseAbsence" />
+          <FunctionImportMapping FunctionImportName="GetAbsencesForASubject" FunctionName="SchoolModel.Store.GetAbsencesForASubject">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAbsencesForASubject_Result">
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="CanBeExcused" ColumnName="CanBeExcused" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAbsencesForStudentForSubject" FunctionName="SchoolModel.Store.GetAbsencesForStudentForSubject">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAbsencesForStudentForSubject_Result">
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="CanBeExcused" ColumnName="CanBeExcused" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAbsencesPerClassroom" FunctionName="SchoolModel.Store.GetAbsencesPerClassroom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAbsencesPerClassroom_Result">
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="CanBeExcused" ColumnName="CanBeExcused" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllAbsencesForStudent" FunctionName="SchoolModel.Store.GetAllAbsencesForStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllAbsencesForStudent_Result">
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="CanBeExcused" ColumnName="CanBeExcused" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllClassMasterClassroomLinks" FunctionName="SchoolModel.Store.GetAllClassMasterClassroomLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllClassMasterClassroomLinks_Result">
+                <ScalarProperty Name="ClassMasterId" ColumnName="ClassMasterId" />
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllClassrooms" FunctionName="SchoolModel.Store.GetAllClassrooms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllClassrooms_Result">
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllMarks" FunctionName="SchoolModel.Store.GetAllMarks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllMarks_Result">
+                <ScalarProperty Name="MarkId" ColumnName="MarkId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="IsThesis" ColumnName="IsThesis" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSpecializations" FunctionName="SchoolModel.Store.GetAllSpecializations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllSpecializations_Result">
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllStudentClassroomLinks" FunctionName="SchoolModel.Store.GetAllStudentClassroomLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllStudentClassroomLinks_Result">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSubjectClassroomLinks" FunctionName="SchoolModel.Store.GetAllSubjectClassroomLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllSubjectClassroomLinks_Result">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+                <ScalarProperty Name="Thesis" ColumnName="Thesis" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSubjects" FunctionName="SchoolModel.Store.GetAllSubjects">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllSubjects_Result">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllSubjectTeacherLinks" FunctionName="SchoolModel.Store.GetAllSubjectTeacherLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllSubjectTeacherLinks_Result">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllTeacherClassroomLinks" FunctionName="SchoolModel.Store.GetAllTeacherClassroomLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllTeacherClassroomLinks_Result">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="SchoolModel.Store.GetAllUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllUsers_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllUserTypes" FunctionName="SchoolModel.Store.GetAllUserTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAllUserTypes_Result">
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAveragesForStudent" FunctionName="SchoolModel.Store.GetAveragesForStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetAveragesForStudent_Result">
+                <ScalarProperty Name="AverageId" ColumnName="AverageId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetClassMasterClassroom" FunctionName="SchoolModel.Store.GetClassMasterClassroom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetClassMasterClassroom_Result">
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ClassMasterId" ColumnName="ClassMasterId" />
+                <ScalarProperty Name="ClassroomId1" ColumnName="ClassroomId1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetClassroomIdForStudent" FunctionName="SchoolModel.Store.GetClassroomIdForStudent" />
+          <FunctionImportMapping FunctionImportName="GetMarksForASubject" FunctionName="SchoolModel.Store.GetMarksForASubject">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetMarksForASubject_Result">
+                <ScalarProperty Name="MarkId" ColumnName="MarkId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsThesis" ColumnName="IsThesis" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMarksForStudent" FunctionName="SchoolModel.Store.GetMarksForStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetMarksForStudent_Result">
+                <ScalarProperty Name="MarkId" ColumnName="MarkId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsThesis" ColumnName="IsThesis" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentsFromClassroom" FunctionName="SchoolModel.Store.GetStudentsFromClassroom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetStudentsFromClassroom_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSubjectsForTeacherForSelectedClassroom" FunctionName="SchoolModel.Store.GetSubjectsForTeacherForSelectedClassroom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetSubjectsForTeacherForSelectedClassroom_Result">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Thesis" ColumnName="Thesis" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSubjectsFromClassroom" FunctionName="SchoolModel.Store.GetSubjectsFromClassroom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetSubjectsFromClassroom_Result">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SubjectId1" ColumnName="SubjectId1" />
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+                <ScalarProperty Name="Thesis" ColumnName="Thesis" />
+                <ScalarProperty Name="ClassroomId1" ColumnName="ClassroomId1" />
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTeachersClassrooms" FunctionName="SchoolModel.Store.GetTeachersClassrooms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetTeachersClassrooms_Result">
+                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="ClassroomId1" ColumnName="ClassroomId1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUnexcusedAbsencesForStudent" FunctionName="SchoolModel.Store.GetUnexcusedAbsencesForStudent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetUnexcusedAbsencesForStudent_Result">
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="CanBeExcused" ColumnName="CanBeExcused" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUnexcusedAbsencesPerClassroom" FunctionName="SchoolModel.Store.GetUnexcusedAbsencesPerClassroom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetUnexcusedAbsencesPerClassroom_Result">
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="CanBeExcused" ColumnName="CanBeExcused" />
+                <ScalarProperty Name="Excused" ColumnName="Excused" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUser" FunctionName="SchoolModel.Store.GetUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolModel.GetUser_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserType" FunctionName="SchoolModel.Store.GetUserType" />
+          <FunctionImportMapping FunctionImportName="MakeAverage" FunctionName="SchoolModel.Store.MakeAverage" />
+          <FunctionImportMapping FunctionImportName="ModifyClassMasterClassroomLink" FunctionName="SchoolModel.Store.ModifyClassMasterClassroomLink" />
+          <FunctionImportMapping FunctionImportName="ModifyClassroom" FunctionName="SchoolModel.Store.ModifyClassroom" />
+          <FunctionImportMapping FunctionImportName="ModifySpecialization" FunctionName="SchoolModel.Store.ModifySpecialization" />
+          <FunctionImportMapping FunctionImportName="ModifyStudentClassroomLink" FunctionName="SchoolModel.Store.ModifyStudentClassroomLink" />
+          <FunctionImportMapping FunctionImportName="ModifySubject" FunctionName="SchoolModel.Store.ModifySubject" />
+          <FunctionImportMapping FunctionImportName="ModifyUser" FunctionName="SchoolModel.Store.ModifyUser" />
+          <FunctionImportMapping FunctionImportName="ModifyUserType" FunctionName="SchoolModel.Store.ModifyUserType" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
