@@ -19,6 +19,8 @@ namespace mvp3.ViewModel
         private SchoolEntities3 context = new SchoolEntities3();
         public ObservableCollection<USER> Students { get; set; }
 
+        public ObservableCollection<CLASSROOM> Classrooms { get; set; }
+
         private USER selectedUser;
         public USER SelectedUser
         {
@@ -30,6 +32,17 @@ namespace mvp3.ViewModel
                     selectedUser = value;
                     NotifyPropertyChanged(nameof(SelectedUser));
                 }
+            }
+        }
+
+        private CLASSROOM selectedClassroom;
+        public CLASSROOM SelectedClassroom
+        {
+            get { return selectedClassroom; }
+            set
+            {
+                selectedClassroom = value;
+                NotifyPropertyChanged(nameof(SelectedClassroom));
             }
         }
 
@@ -46,6 +59,14 @@ namespace mvp3.ViewModel
         public EditStudentsVM()
         {
             LoadStudents();
+            LoadClassrooms();
+        }
+
+        public ICommand AssingUserClassroomCommand => new RelayCommand(AssignUserClassroom);
+
+        private void AssignUserClassroom()
+        {
+            context.AddStudentClassroomLink(SelectedUser.UserId, SelectedClassroom.ClassroomId);
         }
 
         public ICommand CreateUserCommand => new RelayCommand(CreateUser);
@@ -99,6 +120,22 @@ namespace mvp3.ViewModel
                 .ToList();
 
             Students = new ObservableCollection<USER>(users);
+        }
+
+        public void LoadClassrooms()
+        {
+            var result = context.GetAllClassrooms();
+
+            var classes = result.Select(r => new CLASSROOM
+            {
+                ClassroomId = r.ClassroomId,
+                SpecializationId = r.SpecializationId,
+                Year = r.Year,
+                Name = r.Name
+            })
+            .ToList();
+
+            Classrooms = new ObservableCollection<CLASSROOM>(classes);
         }
 
     }

@@ -99,6 +99,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\ClassroomConverter.cs" />
     <Compile Include="Helpers\BaseVM.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Model\ABSENCE.cs">

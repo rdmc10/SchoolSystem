@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mvp3.View"
+        xmlns:converters="clr-namespace:mvp3.Converters"
         xmlns:vm="clr-namespace:mvp3.ViewModel"
         mc:Ignorable="d"
         Title="EditStudentsWindow" Height="450" Width="800">
     <Window.DataContext>
         <vm:EditStudentsVM/>
     </Window.DataContext>
+    <Window.Resources>
+        <converters:ClassroomConverter x:Key="ClassroomConverter" />
+    </Window.Resources>
     <Grid>
         <DataGrid ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedUser, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Margin="31,62,446,112">
             <DataGrid.Columns>
@@ -20,5 +24,8 @@
         <TextBox HorizontalAlignment="Left" Text="{Binding Name}" Margin="437,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button Content="Create" Command="{Binding CreateUserCommand}" HorizontalAlignment="Left" Margin="437,157,0,0" VerticalAlignment="Top"/>
         <Button Content="Delete selected user" Command="{Binding DeleteUserCommand}" HorizontalAlignment="Left" Margin="147,337,0,0" VerticalAlignment="Top"/>
+        <ComboBox  ItemsSource="{Binding Classrooms}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedClassroom}" SelectedValue="{Binding SelectedClassroom.ClassroomId}" SelectedValuePath="ClassroomId" HorizontalAlignment="Left" Margin="437,282,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Assign selected student to class" HorizontalAlignment="Left" Margin="437,241,0,0" VerticalAlignment="Top"/>
+        <Button Content="Assign" Command="{Binding AssingUserClassroomCommand}" HorizontalAlignment="Left" Margin="614,282,0,0" VerticalAlignment="Top" Width="50"/>
     </Grid>
 </Window>
