@@ -19,6 +19,20 @@ namespace mvp3.ViewModel
         private SchoolEntities3 context = new SchoolEntities3();
         public ObservableCollection<USER> Students { get; set; }
 
+        private USER selectedUser;
+        public USER SelectedUser
+        {
+            get { return selectedUser; }
+            set
+            {
+                if (selectedUser != value)
+                {
+                    selectedUser = value;
+                    NotifyPropertyChanged(nameof(SelectedUser));
+                }
+            }
+        }
+
         private string _name { get; set; }
         public string Name
         {
@@ -61,7 +75,12 @@ namespace mvp3.ViewModel
             }
         }
 
-        
+        public ICommand DeleteUserCommand => new RelayCommand(DeleteUser);
+        private void DeleteUser()
+        {
+            context.DeleteUser(SelectedUser.UserId);
+            Students.Remove(SelectedUser);
+        }
 
         public void LoadStudents()
         {
