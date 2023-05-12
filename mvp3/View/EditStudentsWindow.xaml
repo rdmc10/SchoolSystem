@@ -11,10 +11,13 @@
         <vm:EditStudentsVM/>
     </Window.DataContext>
     <Grid>
-        <DataGrid ItemsSource="{Binding Students}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Students}" IsReadOnly="True" AutoGenerateColumns="False" Margin="31,62,446,112">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Enter student name" HorizontalAlignment="Left" Margin="437,68,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Name}" Margin="437,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Create" Command="{Binding CreateUserCommand}" HorizontalAlignment="Left" Margin="437,157,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
