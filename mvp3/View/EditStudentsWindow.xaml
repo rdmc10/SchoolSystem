@@ -28,6 +28,6 @@
         <Label Content="Assign selected student to class" HorizontalAlignment="Left" Margin="437,241,0,0" VerticalAlignment="Top"/>
         <Button Content="Assign" Command="{Binding AssingUserClassroomCommand}" HorizontalAlignment="Left" Margin="614,282,0,0" VerticalAlignment="Top" Width="50"/>
         <Label Content="OR" HorizontalAlignment="Left" Margin="614,319,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.394"/>
-        <Button Content="Modify selected student" HorizontalAlignment="Left" Margin="614,347,0,0" VerticalAlignment="Top"/>
+        <Button Content="Modify selected student" Command="{Binding ModifyUserClassroomCommand}" HorizontalAlignment="Left" Margin="614,347,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
