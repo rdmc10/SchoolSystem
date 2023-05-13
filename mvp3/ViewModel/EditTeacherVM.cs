@@ -17,6 +17,8 @@ namespace mvp3.ViewModel
     {
         private SchoolEntities3 context = new SchoolEntities3();
         public ObservableCollection<USER> Teachers { get; set; }
+        public ObservableCollection<CLASSROOM> Classrooms { get; set; }
+        public ObservableCollection<SUBJECT> Subjects { get; set; }
         private string _name { get; set; }
         public string Name
         {
@@ -26,6 +28,78 @@ namespace mvp3.ViewModel
                 _name = value;
                 NotifyPropertyChanged(nameof(Name));
             }
+        }
+
+        private SUBJECT selectedSubject;
+        public SUBJECT SelectedSubject
+        {
+            get { return selectedSubject; }
+            set
+            {
+                selectedSubject = value;
+                NotifyPropertyChanged(nameof(SelectedSubject));
+            }
+        }
+
+        private CLASSROOM selectedClassroom;
+        public CLASSROOM SelectedClassroom
+        {
+            get { return selectedClassroom; }
+            set
+            {
+                selectedClassroom = value;
+                NotifyPropertyChanged(nameof(SelectedClassroom));
+            }
+        }
+        public void LoadClassrooms()
+        {
+            var result = context.GetAllClassrooms();
+
+            var classes = result.Select(r => new CLASSROOM
+            {
+                ClassroomId = r.ClassroomId,
+                SpecializationId = r.SpecializationId,
+                Year = r.Year,
+                Name = r.Name
+            })
+            .ToList();
+
+            Classrooms = new ObservableCollection<CLASSROOM>(classes);
+        }
+
+        public ICommand CreateTeacherClassroomLinkCommand => new RelayCommand(CreateTeacherClassroomLink);
+
+        private void CreateTeacherClassroomLink()
+        {
+            context.AddTeacherClassroomLink(SelectedTeacher.UserId, SelectedClassroom.ClassroomId);
+        }
+
+        public ICommand MakeClassmasterCommand => new RelayCommand(MakeClassmaster);
+
+        private void MakeClassmaster()
+        {
+            context.AddClassMasterClassroomLink(SelectedTeacher.UserId, SelectedClassroom.ClassroomId);
+        }
+
+        public ICommand RemoveTeacherClassroomLinkCommand => new RelayCommand(RemoveTeacherFromClassroom);
+
+        private void RemoveTeacherFromClassroom()
+        {
+            context.DeleteTeacherClassroomLink(SelectedTeacher.UserId, SelectedClassroom.ClassroomId);
+        }
+
+        public ICommand AssignTeacherToSubjectCommand => new RelayCommand(AssignTeacherToSubject);
+
+        private void AssignTeacherToSubject()
+        {
+            context.AddSubjectTeacherLink(SelectedSubject.SubjectId, SelectedTeacher.UserId);
+        }
+
+        public ICommand RemoveTeacherSubjectCommand => new RelayCommand(RemoveTeacherSubjectLink);
+
+        private void RemoveTeacherSubjectLink()
+        {
+            context.DeleteSubjectTeacherLink(SelectedSubject.SubjectId, SelectedTeacher.UserId);
         }
 
         public ICommand CreateTeacherCommand => new RelayCommand(CreateTeacher);
@@ -94,10 +168,26 @@ namespace mvp3.ViewModel
             Teachers = new ObservableCollection<USER>(users);
         }
 
+        public void LoadSubjects()
+        {
+            var result = context.GetAllSubjects();
+
+            var subjects = result.Select(r => new SUBJECT
+            {
+                SubjectId = r.SubjectId,
+                Name = r.Name
+            })
+            .ToList();
+
+            Subjects = new ObservableCollection<SUBJECT>(subjects);
+        }
+
 
         public EditTeacherVM() 
         {
             LoadTeachers();
+            LoadClassrooms();
+            LoadSubjects();
         }
     }
 }

@@ -22,6 +22,15 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Delete teacher" Command="{Binding DeleteTeacherCommand}" HorizontalAlignment="Left" Margin="60,368,0,0" VerticalAlignment="Top"/>
+        <ComboBox  ItemsSource="{Binding Classrooms}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedClassroom}" SelectedValue="{Binding SelectedClassroom.ClassroomId}" SelectedValuePath="ClassroomId" HorizontalAlignment="Left" Margin="446,89,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox  ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedSubject}" SelectedValue="{Binding SelectedSubject.SubjectId}" SelectedValuePath="SubjectId" HorizontalAlignment="Left" Margin="446,249,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Make teacher of selected classroom" Command="{Binding CreateTeacherClassroomLinkCommand}" HorizontalAlignment="Left" Margin="446,132,0,0" VerticalAlignment="Top"/>
+        <Button Content="Make classmaster of selected classroom" Command="{Binding MakeClassmasterCommand}" HorizontalAlignment="Left" Margin="446,175,0,0" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="144" Margin="413,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="277"/>
+        <Button Content="Assign teacher to subject" Command="{Binding AssignTeacherToSubjectCommand}" HorizontalAlignment="Left" Margin="446,294,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,-0.114"/>
+        <Button Content="Remove teacher-subject link" Command="{Binding RemoveTeacherSubjectCommand}" HorizontalAlignment="Left" Margin="446,332,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.858,0.43"/>
+        <Rectangle HorizontalAlignment="Left" Height="112" Margin="413,249,0,0" Stroke="Black" VerticalAlignment="Top" Width="277"/>
+        <Button Content="Remove teacher from classroom" Command="{Binding RemoveTeacherClassroomLinkCommand}" HorizontalAlignment="Left" Margin="446,202,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
