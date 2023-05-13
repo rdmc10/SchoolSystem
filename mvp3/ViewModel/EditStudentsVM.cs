@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -108,6 +109,14 @@ namespace mvp3.ViewModel
         {
             context.DeleteUser(SelectedUser.UserId);
             Students.Remove(SelectedUser);
+        }
+
+        public ICommand RemoveStudentFromClassCommand => new RelayCommand(RemoveStudentFromClass);
+
+        private void RemoveStudentFromClass()
+        {
+            var classroomId = context.GetClassroomIdForStudent(SelectedUser.UserId);
+            context.DeleteStudentClassroomLink(SelectedUser.UserId, classroomId.SingleOrDefault());
         }
 
         public void LoadStudents()
