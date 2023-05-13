@@ -19,7 +19,11 @@ namespace mvp3.ViewModel
             editStudentsWindow.ShowDialog();
         }
         public ICommand EditTeachersCommand => new RelayCommand(EditTeachers);
-        private void EditTeachers() { }
+        private void EditTeachers() 
+        {
+            EditTeacherWindow editTeacherWindow = new EditTeacherWindow();
+            editTeacherWindow.ShowDialog(); 
+        }
         public ICommand EditClassroomsCommand => new RelayCommand(EditClassrooms);
         private void EditClassrooms() 
         {
