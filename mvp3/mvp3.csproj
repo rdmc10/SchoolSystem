@@ -87,6 +87,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EditClassroomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditStudentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,7 @@
     <Compile Include="Model\AVERAGE.cs">
       <DependentUpon>SchoolModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\BussinessLogicLayer\UserBLL.cs" />
     <Compile Include="Model\CLASSROOM.cs">
       <DependentUpon>SchoolModels.tt</DependentUpon>
     </Compile>
@@ -223,10 +228,14 @@
       <DependentUpon>SchoolModels.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminWindowVM.cs" />
+    <Compile Include="ViewModel\EditClassroomVM.cs" />
     <Compile Include="ViewModel\EditStudentsVM.cs" />
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditClassroomWindow.xaml.cs">
+      <DependentUpon>EditClassroomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditStudentsWindow.xaml.cs">
       <DependentUpon>EditStudentsWindow.xaml</DependentUpon>
@@ -271,7 +280,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\BussinessLogicLayer\" />
     <Folder Include="Model\DataAccessLayer\" />
     <Folder Include="Model\EntityLayer\" />
   </ItemGroup>

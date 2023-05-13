@@ -69,6 +69,13 @@ namespace mvp3.ViewModel
             context.AddStudentClassroomLink(SelectedUser.UserId, SelectedClassroom.ClassroomId);
         }
 
+        public ICommand ModifyUserClassroomCommand => new RelayCommand(ModifyUserClassroom);
+
+        private void ModifyUserClassroom()
+        {
+            context.ModifyStudentClassroomLink(SelectedUser.UserId, SelectedClassroom.ClassroomId);
+        }
+
         public ICommand CreateUserCommand => new RelayCommand(CreateUser);
 
         private void CreateUser()
