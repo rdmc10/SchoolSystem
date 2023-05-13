@@ -153,14 +153,10 @@ namespace mvp3.Model
                 new ObjectParameter("name", name) :
                 new ObjectParameter("name", typeof(string));
     
-            var thesisParameter = thesis.HasValue ?
-                new ObjectParameter("thesis", thesis) :
-                new ObjectParameter("thesis", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubject", nameParameter, thesisParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubject", nameParameter);
         }
     
-        public virtual int AddSubjectClassroomLink(Nullable<int> subjectId, Nullable<int> classroomId)
+        public virtual int AddSubjectClassroomLink(Nullable<int> subjectId, Nullable<int> classroomId, Nullable<bool> thesis)
         {
             var subjectIdParameter = subjectId.HasValue ?
                 new ObjectParameter("subjectId", subjectId) :
@@ -169,8 +165,13 @@ namespace mvp3.Model
             var classroomIdParameter = classroomId.HasValue ?
                 new ObjectParameter("classroomId", classroomId) :
                 new ObjectParameter("classroomId", typeof(int));
+
+            var thesisParameter = thesis.HasValue ?
+                new ObjectParameter("thesis", thesis) :
+                new ObjectParameter("thesis", typeof(bool));
+
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubjectClassroomLink", subjectIdParameter, classroomIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubjectClassroomLink", subjectIdParameter, classroomIdParameter, thesisParameter);
         }
     
         public virtual int AddSubjectTeacherLink(Nullable<int> subjectId, Nullable<int> teacherId)

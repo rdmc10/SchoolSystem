@@ -23,5 +23,6 @@ namespace mvp3.View
         {
             InitializeComponent();
         }
+
     }
 }

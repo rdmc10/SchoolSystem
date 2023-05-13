@@ -4,10 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mvp3.View"
+        xmlns:vm="clr-namespace:mvp3.ViewModel"
         mc:Ignorable="d"
         Title="EditClassroomWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:EditClassroomVM/>
+    </Window.DataContext>
     <Grid>
         <ComboBox  ItemsSource="{Binding Classrooms}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedClassroom}" SelectedValue="{Binding SelectedClassroom.ClassroomId}" SelectedValuePath="ClassroomId" HorizontalAlignment="Left" Margin="47,32,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox  ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedSubject}" SelectedValue="{Binding SelectedSubject.SubjectId}" SelectedValuePath="SubjectId" HorizontalAlignment="Left" Margin="411,89,0,0" VerticalAlignment="Top" Width="120"/>
+        <DataGrid ItemsSource="{Binding Subjects}" SelectedItem="{Binding SelectedSubject, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Margin="47,87,430,87">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Add" Command="{Binding AddSubjectToClassromCommand}" HorizontalAlignment="Left" Margin="411,132,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.468,0.565"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding SubjectName}" Margin="483,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Button Content="Add new subject" Command="{Binding AddNewSubjectCommand}" HorizontalAlignment="Left" Margin="483,281,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.769,0.464"/>
+        <CheckBox Content="Thesis" IsChecked="{Binding Thesis}" HorizontalAlignment="Left" Margin="559,92,0,0" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="130" Margin="431,217,0,0" Stroke="Black" VerticalAlignment="Top" Width="224"/>
 
     </Grid>
 </Window>
