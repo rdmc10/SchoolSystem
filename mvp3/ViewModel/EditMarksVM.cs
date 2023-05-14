@@ -109,14 +109,22 @@ namespace mvp3.ViewModel
                 var result = context.GetAveragesForStudent(Student.UserId);
                 var avg = result.FirstOrDefault(r => r.SubjectId == Subject.SubjectId && r.Semester == Semester);
 
-                FirstSemString = "Average for 1st sem: " + avg.Value.ToString();
+                if(avg != null)
+                {
+                    FirstSemString = "Average for 1st sem: " + avg.Value.ToString();
+                    firstSemClosed = true;
+                }
             }
             if(Semester == 2)
             {
                 var result = context.GetAveragesForStudent(Student.UserId);
                 var avg = result.FirstOrDefault(r => r.SubjectId == Subject.SubjectId && r.Semester == Semester);
 
-                SecSemString = "Average for 2nd sem: " + avg.Value.ToString();
+                if (avg != null)
+                {
+                    SecSemString = "Average for 2nd sem: " + avg.Value.ToString();
+                    secSemClosed = true;
+                }
 
             }
         }

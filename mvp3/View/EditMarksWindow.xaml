@@ -27,7 +27,7 @@
         <Rectangle HorizontalAlignment="Left" Height="323" Margin="412,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="306"/>
         <Button Content="Add" Command="{Binding AddMarkCommand}" HorizontalAlignment="Left" Margin="662,351,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.785,1.914"/>
         <Label Content="{Binding HeaderString}" HorizontalAlignment="Left" Margin="31,30,0,0" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding SemesterOptions}" SelectedValue="{Binding Semester, Mode=TwoWay}" Margin="440,273,198,112">
+        <ComboBox ItemsSource="{Binding SemesterOptions}" SelectedValue="{Binding Semester, Mode=TwoWay}" Margin="440,273,198,132">
         </ComboBox>
         <Button Content="Delete mark" Command="{Binding DeleteMarkCommand}" HorizontalAlignment="Left" Margin="83,351,0,0" VerticalAlignment="Top"/>
         <Label Content="Semester" HorizontalAlignment="Left" Margin="441,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.564,0.259"/>
