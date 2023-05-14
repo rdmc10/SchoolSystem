@@ -13,15 +13,17 @@ namespace mvp3.ViewModel
 {
     public class EditMarksVM : BaseVM
     {
-        public string HeaderString;
+        public string HeaderString { get; set; }
         public EditMarksVM() { }
         private SchoolEntities4 context = new SchoolEntities4();
+        public ObservableCollection<int> SemesterOptions { get; set; }
 
         public ObservableCollection<MARK> Marks { get; set; }
         private USER Student { get; set; }
         private SUBJECT Subject { get; set; }
         public EditMarksVM(SUBJECT subject, USER student) 
-        { 
+        {
+            SemesterOptions = new ObservableCollection<int> { 1, 2 };
             Student = student;
             Subject = subject;
             LoadMarks();
@@ -74,9 +76,12 @@ namespace mvp3.ViewModel
         public ICommand DeleteMarkCommand => new RelayCommand(DeleteMark);
         private void DeleteMark()
         {
-            context.DeleteMark(SelectedMark.MarkId);
-            Marks.Remove(SelectedMark);
-            SelectedMark = null;
+            if(SelectedMark != null)
+            {
+                context.DeleteMark(SelectedMark.MarkId);
+                Marks.Remove(SelectedMark);
+                SelectedMark = null;
+            }
         }
         public ICommand AddMarkCommand => new RelayCommand(AddMark);
         private void AddMark()
