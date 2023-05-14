@@ -13,6 +13,13 @@
     <Grid>
         <ComboBox  ItemsSource="{Binding Classrooms}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedClassroom}" SelectedValue="{Binding SelectedClassroom.ClassroomId}" SelectedValuePath="ClassroomId" HorizontalAlignment="Left" Margin="106,20,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Classroom" HorizontalAlignment="Left" Margin="22,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.601,0.277"/>
+        <DataGrid ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedStudent, Mode=TwoWay}" IsReadOnly="True" AutoGenerateColumns="False" Margin="31,62,446,112">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Marks" HorizontalAlignment="Left" Margin="417,111,0,0" VerticalAlignment="Top"/>
+        <Button Content="Absences" HorizontalAlignment="Left" Margin="417,150,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

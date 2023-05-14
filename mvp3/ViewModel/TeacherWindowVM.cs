@@ -12,6 +12,16 @@ namespace mvp3.ViewModel
     public class TeacherWindowVM : BaseVM
     {
         public ObservableCollection<CLASSROOM> Classrooms { get; set; }
+        private ObservableCollection<USER> students = new ObservableCollection<USER>();
+        public ObservableCollection<USER> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                NotifyPropertyChanged(nameof(Students));
+            }
+        }
 
         private SchoolEntities4 context = new SchoolEntities4();
 
@@ -26,6 +36,25 @@ namespace mvp3.ViewModel
             LoadClassrooms();
         }    
 
+        public void LoadStudents()
+        {
+            var result = context.GetStudentsFromClassroom(SelectedClassroom.ClassroomId);
+
+            var users = result
+                .Where(r => r.UserTypeId == 1)
+                .Select(r => new USER
+                {
+                    UserId = r.UserId,
+                    UserTypeId = r.UserTypeId,
+                    Username = r.Username,
+                    Name = r.Name,
+                    Password = r.Password
+                }) 
+                .ToList();
+
+            Students = new ObservableCollection<USER>(users);
+        }
+
         private CLASSROOM selectedClassroom;
         public CLASSROOM SelectedClassroom
         {
@@ -34,6 +63,21 @@ namespace mvp3.ViewModel
             {
                 selectedClassroom = value;
                 NotifyPropertyChanged(nameof(SelectedClassroom));
+                LoadStudents();
+            }
+        }
+
+        private USER selectedStudent;
+        public USER SelectedStudent
+        {
+            get { return selectedStudent; }
+            set
+            {
+                if (selectedStudent != value)
+                {
+                    selectedStudent = value;
+                    NotifyPropertyChanged(nameof(SelectedStudent));
+                }
             }
         }
 

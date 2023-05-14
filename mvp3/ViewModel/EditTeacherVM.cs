@@ -80,7 +80,7 @@ namespace mvp3.ViewModel
         {
             context.AddClassMasterClassroomLink(SelectedTeacher.UserId, SelectedClassroom.ClassroomId);
 
-            if (Name != null)
+            if (SelectedTeacher != null)
             {
                 string username = SelectedTeacher.Name.Replace(" ", "").ToLower() + "@dirig.ro";
                 string password = SelectedTeacher.Name.Replace(" ", "").ToLower() + "123";

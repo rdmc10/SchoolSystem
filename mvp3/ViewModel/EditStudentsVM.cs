@@ -67,7 +67,10 @@ namespace mvp3.ViewModel
 
         private void AssignUserClassroom()
         {
-            context.AddStudentClassroomLink(SelectedUser.UserId, SelectedClassroom.ClassroomId);
+            if(SelectedUser.UserId != 0)
+            {
+                context.AddStudentClassroomLink(SelectedUser.UserId, SelectedClassroom.ClassroomId);
+            }
         }
 
         public ICommand ModifyUserClassroomCommand => new RelayCommand(ModifyUserClassroom);
@@ -102,6 +105,7 @@ namespace mvp3.ViewModel
             {
                 MessageBox.Show("You can't create a user without a name!");
             }
+            LoadStudents();
         }
 
         public ICommand DeleteUserCommand => new RelayCommand(DeleteUser);
