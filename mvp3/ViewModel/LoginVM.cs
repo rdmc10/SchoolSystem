@@ -17,7 +17,7 @@ namespace mvp3.ViewModel
 {
     public class LoginVM : BaseVM
     {
-        private SchoolEntities3 context = new SchoolEntities3();
+        private SchoolEntities4 context = new SchoolEntities4();
         private string _username {  get; set; }
         public string Username
         {
@@ -64,6 +64,18 @@ namespace mvp3.ViewModel
         private void Login()
         {
             var user = context.GetUser(Username, Password).FirstOrDefault();
+            USER usr = new USER();
+            if(user != null)
+            {
+                usr = new USER()
+                {
+                    UserId = user.UserId,
+                    Name = user.Name,
+                    UserTypeId = user.UserTypeId,
+                    Username = user.Username,
+                    Password = user.Password
+                };
+            }
 
             if (user != null)
             {
@@ -71,9 +83,12 @@ namespace mvp3.ViewModel
                 switch (usertype)
                 {
                     case 1:
-                        MessageBox.Show(usertype.ToString());
                         break;
                     case 2:
+                        TeacherWindowVM twvm = new TeacherWindowVM(usr);
+                        TeacherWindow teacherWindow = new TeacherWindow();
+                        teacherWindow.DataContext = twvm;
+                        teacherWindow.ShowDialog();
                         break;
                     case 3:
                         break;

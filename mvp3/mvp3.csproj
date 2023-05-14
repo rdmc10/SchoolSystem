@@ -83,6 +83,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\SchoolDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SchoolDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SchoolDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchoolDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\TeacherWindowVM.cs" />
+    <Compile Include="View\TeacherWindow.xaml.cs">
+      <DependentUpon>TeacherWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,125 +130,110 @@
     <Compile Include="Helpers\BaseVM.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Model\ABSENCE.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\AVERAGE.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\BussinessLogicLayer\UserBLL.cs" />
     <Compile Include="Model\CLASSROOM.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAbsencesForASubject_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAbsencesForStudentForSubject_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAbsencesPerClassroom_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllAbsencesForStudent_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllClassMasterClassroomLinks_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllClassrooms_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllMarks_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllSpecializations_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllStudentClassroomLinks_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllSubjectClassroomLinks_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllSubjects_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllSubjectTeacherLinks_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllTeacherClassroomLinks_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllUsers_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAllUserTypes_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetAveragesForStudent_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetClassMasterClassroom_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetMarksForASubject_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetMarksForStudent_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetStudentsFromClassroom_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetSubjectsForTeacherForSelectedClassroom_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetSubjectsFromClassroom_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetTeachersClassrooms_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetUnexcusedAbsencesForStudent_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetUnexcusedAbsencesPerClassroom_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GetUser_Result.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\MARK.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SchoolModels.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SchoolModels.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SchoolModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SchoolModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SchoolModels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SchoolModels.edmx</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SPECIALIZATION.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SUBJECT.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SUBJECT_CLASSROOM.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\USER.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\USER_TYPE.cs">
-      <DependentUpon>SchoolModels.tt</DependentUpon>
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminWindowVM.cs" />
     <Compile Include="ViewModel\EditClassroomVM.cs" />
@@ -252,6 +256,10 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\TeacherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -271,12 +279,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\SchoolModels.edmx">
+    <EntityDeploy Include="Model\SchoolDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SchoolModels.Designer.cs</LastGenOutput>
+      <LastGenOutput>SchoolDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\SchoolModels.edmx.diagram">
-      <DependentUpon>SchoolModels.edmx</DependentUpon>
+    <None Include="Model\SchoolDataModel.edmx.diagram">
+      <DependentUpon>SchoolDataModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -295,15 +303,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\SchoolModels.Context.tt">
+    <Content Include="Model\SchoolDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SchoolModels.edmx</DependentUpon>
-      <LastGenOutput>SchoolModels.Context.cs</LastGenOutput>
+      <DependentUpon>SchoolDataModel.edmx</DependentUpon>
+      <LastGenOutput>SchoolDataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\SchoolModels.tt">
+    <Content Include="Model\SchoolDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SchoolModels.edmx</DependentUpon>
-      <LastGenOutput>SchoolModels.cs</LastGenOutput>
+      <DependentUpon>SchoolDataModel.edmx</DependentUpon>
+      <LastGenOutput>SchoolDataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,7 +17,5 @@ namespace mvp3.Model
         public int SpecializationId { get; set; }
         public int Year { get; set; }
         public string Name { get; set; }
-        public int TeacherId { get; set; }
-        public int ClassroomId1 { get; set; }
     }
 }

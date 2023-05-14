@@ -15,7 +15,7 @@ namespace mvp3.ViewModel
 {
     public class EditTeacherVM : BaseVM
     {
-        private SchoolEntities3 context = new SchoolEntities3();
+        private SchoolEntities4 context = new SchoolEntities4();
         public ObservableCollection<USER> Teachers { get; set; }
         public ObservableCollection<CLASSROOM> Classrooms { get; set; }
         public ObservableCollection<SUBJECT> Subjects { get; set; }
@@ -79,6 +79,23 @@ namespace mvp3.ViewModel
         private void MakeClassmaster()
         {
             context.AddClassMasterClassroomLink(SelectedTeacher.UserId, SelectedClassroom.ClassroomId);
+
+            if (Name != null)
+            {
+                string username = SelectedTeacher.Name.Replace(" ", "").ToLower() + "@dirig.ro";
+                string password = SelectedTeacher.Name.Replace(" ", "").ToLower() + "123";
+                int typeId = 3;
+
+                USER newUser = new USER()
+                {
+                    Name = Name,
+                    Password = password,
+                    Username = username,
+                    UserTypeId = typeId
+                };
+
+                context.AddUser(SelectedTeacher.Name, username, password, typeId);
+            }
         }
 
         public ICommand RemoveTeacherClassroomLinkCommand => new RelayCommand(RemoveTeacherFromClassroom);

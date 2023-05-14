@@ -15,10 +15,10 @@ namespace mvp3.Model
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SchoolEntities3 : DbContext
+    public partial class SchoolEntities4 : DbContext
     {
-        public SchoolEntities3()
-            : base("name=SchoolEntities3")
+        public SchoolEntities4()
+            : base("name=SchoolEntities4")
         {
         }
     
@@ -153,7 +153,11 @@ namespace mvp3.Model
                 new ObjectParameter("name", name) :
                 new ObjectParameter("name", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubject", nameParameter);
+            var thesisParameter = thesis.HasValue ?
+                new ObjectParameter("thesis", thesis) :
+                new ObjectParameter("thesis", typeof(bool));
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubject", nameParameter, thesisParameter);
         }
     
         public virtual int AddSubjectClassroomLink(Nullable<int> subjectId, Nullable<int> classroomId, Nullable<bool> thesis)
@@ -165,11 +169,10 @@ namespace mvp3.Model
             var classroomIdParameter = classroomId.HasValue ?
                 new ObjectParameter("classroomId", classroomId) :
                 new ObjectParameter("classroomId", typeof(int));
-
+    
             var thesisParameter = thesis.HasValue ?
                 new ObjectParameter("thesis", thesis) :
                 new ObjectParameter("thesis", typeof(bool));
-
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddSubjectClassroomLink", subjectIdParameter, classroomIdParameter, thesisParameter);
         }

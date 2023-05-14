@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SchoolModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ABSENCE">
           <Key>
             <PropertyRef Name="AbsenceId" />
@@ -404,11 +404,11 @@
         </Function>
         <Function Name="AddSubject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="varchar" Mode="In" />
-          <Parameter Name="thesis" Type="bit" Mode="In" />
         </Function>
         <Function Name="AddSubjectClassroomLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="subjectId" Type="int" Mode="In" />
           <Parameter Name="classroomId" Type="int" Mode="In" />
+          <Parameter Name="thesis" Type="bit" Mode="In" />
         </Function>
         <Function Name="AddSubjectTeacherLink" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="subjectId" Type="int" Mode="In" />
@@ -577,7 +577,7 @@
           <Parameter Name="userTypeId" Type="int" Mode="In" />
           <Parameter Name="name" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="SchoolModelStoreContainer">
+        <EntityContainer Name="SchoolModel1StoreContainer">
           <EntitySet Name="ABSENCE" EntityType="Self.ABSENCE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AVERAGE" EntityType="Self.AVERAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CLASS_MASTER_CLASSROOM" EntityType="Self.CLASS_MASTER_CLASSROOM" Schema="dbo" store:Type="Tables" />
@@ -668,7 +668,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SchoolModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ABSENCE">
           <Key>
             <PropertyRef Name="AbsenceId" />
@@ -934,7 +934,7 @@
           <End Role="CLASSROOM" Type="Self.CLASSROOM" Multiplicity="*" />
           <End Role="USER" Type="Self.USER" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="SchoolEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SchoolEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ABSENCEs" EntityType="Self.ABSENCE" />
           <EntitySet Name="AVERAGEs" EntityType="Self.AVERAGE" />
           <EntitySet Name="CLASSROOMs" EntityType="Self.CLASSROOM" />
@@ -1034,11 +1034,11 @@
           </FunctionImport>
           <FunctionImport Name="AddSubject">
             <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="thesis" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="AddSubjectClassroomLink">
             <Parameter Name="subjectId" Mode="In" Type="Int32" />
             <Parameter Name="classroomId" Mode="In" Type="Int32" />
+            <Parameter Name="thesis" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="AddSubjectTeacherLink">
             <Parameter Name="subjectId" Mode="In" Type="Int32" />
@@ -1097,72 +1097,72 @@
           <FunctionImport Name="ExcuseAbsence">
             <Parameter Name="absenceId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAbsencesForASubject" ReturnType="Collection(SchoolModel.GetAbsencesForASubject_Result)">
+          <FunctionImport Name="GetAbsencesForASubject" ReturnType="Collection(SchoolModel1.GetAbsencesForASubject_Result)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
             <Parameter Name="subjectId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAbsencesForStudentForSubject" ReturnType="Collection(SchoolModel.GetAbsencesForStudentForSubject_Result)">
+          <FunctionImport Name="GetAbsencesForStudentForSubject" ReturnType="Collection(SchoolModel1.GetAbsencesForStudentForSubject_Result)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
             <Parameter Name="subjectId" Mode="In" Type="Int32" />
             <Parameter Name="semester" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAbsencesPerClassroom" ReturnType="Collection(SchoolModel.GetAbsencesPerClassroom_Result)">
+          <FunctionImport Name="GetAbsencesPerClassroom" ReturnType="Collection(SchoolModel1.GetAbsencesPerClassroom_Result)">
             <Parameter Name="classroomId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAllAbsencesForStudent" ReturnType="Collection(SchoolModel.GetAllAbsencesForStudent_Result)">
+          <FunctionImport Name="GetAllAbsencesForStudent" ReturnType="Collection(SchoolModel1.GetAllAbsencesForStudent_Result)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
             <Parameter Name="semester" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAllClassMasterClassroomLinks" ReturnType="Collection(SchoolModel.GetAllClassMasterClassroomLinks_Result)" />
-          <FunctionImport Name="GetAllClassrooms" ReturnType="Collection(SchoolModel.GetAllClassrooms_Result)" />
-          <FunctionImport Name="GetAllMarks" ReturnType="Collection(SchoolModel.GetAllMarks_Result)" />
-          <FunctionImport Name="GetAllSpecializations" ReturnType="Collection(SchoolModel.GetAllSpecializations_Result)" />
-          <FunctionImport Name="GetAllStudentClassroomLinks" ReturnType="Collection(SchoolModel.GetAllStudentClassroomLinks_Result)" />
-          <FunctionImport Name="GetAllSubjectClassroomLinks" ReturnType="Collection(SchoolModel.GetAllSubjectClassroomLinks_Result)" />
-          <FunctionImport Name="GetAllSubjects" ReturnType="Collection(SchoolModel.GetAllSubjects_Result)" />
-          <FunctionImport Name="GetAllSubjectTeacherLinks" ReturnType="Collection(SchoolModel.GetAllSubjectTeacherLinks_Result)" />
-          <FunctionImport Name="GetAllTeacherClassroomLinks" ReturnType="Collection(SchoolModel.GetAllTeacherClassroomLinks_Result)" />
-          <FunctionImport Name="GetAllUsers" ReturnType="Collection(SchoolModel.GetAllUsers_Result)" />
-          <FunctionImport Name="GetAllUserTypes" ReturnType="Collection(SchoolModel.GetAllUserTypes_Result)" />
-          <FunctionImport Name="GetAveragesForStudent" ReturnType="Collection(SchoolModel.GetAveragesForStudent_Result)">
+          <FunctionImport Name="GetAllClassMasterClassroomLinks" ReturnType="Collection(SchoolModel1.GetAllClassMasterClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllClassrooms" ReturnType="Collection(SchoolModel1.GetAllClassrooms_Result)" />
+          <FunctionImport Name="GetAllMarks" ReturnType="Collection(SchoolModel1.GetAllMarks_Result)" />
+          <FunctionImport Name="GetAllSpecializations" ReturnType="Collection(SchoolModel1.GetAllSpecializations_Result)" />
+          <FunctionImport Name="GetAllStudentClassroomLinks" ReturnType="Collection(SchoolModel1.GetAllStudentClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllSubjectClassroomLinks" ReturnType="Collection(SchoolModel1.GetAllSubjectClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllSubjects" ReturnType="Collection(SchoolModel1.GetAllSubjects_Result)" />
+          <FunctionImport Name="GetAllSubjectTeacherLinks" ReturnType="Collection(SchoolModel1.GetAllSubjectTeacherLinks_Result)" />
+          <FunctionImport Name="GetAllTeacherClassroomLinks" ReturnType="Collection(SchoolModel1.GetAllTeacherClassroomLinks_Result)" />
+          <FunctionImport Name="GetAllUsers" ReturnType="Collection(SchoolModel1.GetAllUsers_Result)" />
+          <FunctionImport Name="GetAllUserTypes" ReturnType="Collection(SchoolModel1.GetAllUserTypes_Result)" />
+          <FunctionImport Name="GetAveragesForStudent" ReturnType="Collection(SchoolModel1.GetAveragesForStudent_Result)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetClassMasterClassroom" ReturnType="Collection(SchoolModel.GetClassMasterClassroom_Result)">
+          <FunctionImport Name="GetClassMasterClassroom" ReturnType="Collection(SchoolModel1.GetClassMasterClassroom_Result)">
             <Parameter Name="teacherId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetClassroomIdForStudent" ReturnType="Collection(Int32)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetMarksForASubject" ReturnType="Collection(SchoolModel.GetMarksForASubject_Result)">
+          <FunctionImport Name="GetMarksForASubject" ReturnType="Collection(SchoolModel1.GetMarksForASubject_Result)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
             <Parameter Name="subjectId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetMarksForStudent" ReturnType="Collection(SchoolModel.GetMarksForStudent_Result)">
+          <FunctionImport Name="GetMarksForStudent" ReturnType="Collection(SchoolModel1.GetMarksForStudent_Result)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
             <Parameter Name="subjectId" Mode="In" Type="Int32" />
             <Parameter Name="semester" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetStudentsFromClassroom" ReturnType="Collection(SchoolModel.GetStudentsFromClassroom_Result)">
+          <FunctionImport Name="GetStudentsFromClassroom" ReturnType="Collection(SchoolModel1.GetStudentsFromClassroom_Result)">
             <Parameter Name="classroomId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetSubjectsForTeacherForSelectedClassroom" ReturnType="Collection(SchoolModel.GetSubjectsForTeacherForSelectedClassroom_Result)">
+          <FunctionImport Name="GetSubjectsForTeacherForSelectedClassroom" ReturnType="Collection(SchoolModel1.GetSubjectsForTeacherForSelectedClassroom_Result)">
             <Parameter Name="teacherId" Mode="In" Type="Int32" />
             <Parameter Name="classroomId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetSubjectsFromClassroom" ReturnType="Collection(SchoolModel.GetSubjectsFromClassroom_Result)">
+          <FunctionImport Name="GetSubjectsFromClassroom" ReturnType="Collection(SchoolModel1.GetSubjectsFromClassroom_Result)">
             <Parameter Name="classroomId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetTeachersClassrooms" ReturnType="Collection(SchoolModel.GetTeachersClassrooms_Result)">
+          <FunctionImport Name="GetTeachersClassrooms" ReturnType="Collection(SchoolModel1.GetTeachersClassrooms_Result)">
             <Parameter Name="teacherId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetUnexcusedAbsencesForStudent" ReturnType="Collection(SchoolModel.GetUnexcusedAbsencesForStudent_Result)">
+          <FunctionImport Name="GetUnexcusedAbsencesForStudent" ReturnType="Collection(SchoolModel1.GetUnexcusedAbsencesForStudent_Result)">
             <Parameter Name="studentId" Mode="In" Type="Int32" />
             <Parameter Name="semester" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetUnexcusedAbsencesPerClassroom" ReturnType="Collection(SchoolModel.GetUnexcusedAbsencesPerClassroom_Result)">
+          <FunctionImport Name="GetUnexcusedAbsencesPerClassroom" ReturnType="Collection(SchoolModel1.GetUnexcusedAbsencesPerClassroom_Result)">
             <Parameter Name="classroomId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetUser" ReturnType="Collection(SchoolModel.GetUser_Result)">
+          <FunctionImport Name="GetUser" ReturnType="Collection(SchoolModel1.GetUser_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
@@ -1369,8 +1369,6 @@
           <Property Type="Int32" Name="SpecializationId" Nullable="false" />
           <Property Type="Int32" Name="Year" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="TeacherId" Nullable="false" />
-          <Property Type="Int32" Name="ClassroomId1" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetUnexcusedAbsencesForStudent_Result">
           <Property Type="Int32" Name="AbsenceId" Nullable="false" />
@@ -1404,9 +1402,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer" CdmEntityContainer="SchoolEntities3">
+        <EntityContainerMapping StorageEntityContainer="SchoolModel1StoreContainer" CdmEntityContainer="SchoolEntities4">
           <EntitySetMapping Name="ABSENCEs">
-            <EntityTypeMapping TypeName="SchoolModel.ABSENCE">
+            <EntityTypeMapping TypeName="SchoolModel1.ABSENCE">
               <MappingFragment StoreEntitySet="ABSENCE">
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
@@ -1419,7 +1417,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AVERAGEs">
-            <EntityTypeMapping TypeName="SchoolModel.AVERAGE">
+            <EntityTypeMapping TypeName="SchoolModel1.AVERAGE">
               <MappingFragment StoreEntitySet="AVERAGE">
                 <ScalarProperty Name="AverageId" ColumnName="AverageId" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -1430,7 +1428,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CLASSROOMs">
-            <EntityTypeMapping TypeName="SchoolModel.CLASSROOM">
+            <EntityTypeMapping TypeName="SchoolModel1.CLASSROOM">
               <MappingFragment StoreEntitySet="CLASSROOM">
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
                 <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
@@ -1440,7 +1438,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MARKs">
-            <EntityTypeMapping TypeName="SchoolModel.MARK">
+            <EntityTypeMapping TypeName="SchoolModel1.MARK">
               <MappingFragment StoreEntitySet="MARK">
                 <ScalarProperty Name="MarkId" ColumnName="MarkId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
@@ -1453,7 +1451,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SPECIALIZATIONs">
-            <EntityTypeMapping TypeName="SchoolModel.SPECIALIZATION">
+            <EntityTypeMapping TypeName="SchoolModel1.SPECIALIZATION">
               <MappingFragment StoreEntitySet="SPECIALIZATION">
                 <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1461,7 +1459,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SUBJECTs">
-            <EntityTypeMapping TypeName="SchoolModel.SUBJECT">
+            <EntityTypeMapping TypeName="SchoolModel1.SUBJECT">
               <MappingFragment StoreEntitySet="SUBJECT">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1469,7 +1467,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SUBJECT_CLASSROOM">
-            <EntityTypeMapping TypeName="SchoolModel.SUBJECT_CLASSROOM">
+            <EntityTypeMapping TypeName="SchoolModel1.SUBJECT_CLASSROOM">
               <MappingFragment StoreEntitySet="SUBJECT_CLASSROOM">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
@@ -1478,7 +1476,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USERs">
-            <EntityTypeMapping TypeName="SchoolModel.USER">
+            <EntityTypeMapping TypeName="SchoolModel1.USER">
               <MappingFragment StoreEntitySet="USER">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1489,14 +1487,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USER_TYPE">
-            <EntityTypeMapping TypeName="SchoolModel.USER_TYPE">
+            <EntityTypeMapping TypeName="SchoolModel1.USER_TYPE">
               <MappingFragment StoreEntitySet="USER_TYPE">
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="CLASS_MASTER_CLASSROOM" TypeName="SchoolModel.CLASS_MASTER_CLASSROOM" StoreEntitySet="CLASS_MASTER_CLASSROOM">
+          <AssociationSetMapping Name="CLASS_MASTER_CLASSROOM" TypeName="SchoolModel1.CLASS_MASTER_CLASSROOM" StoreEntitySet="CLASS_MASTER_CLASSROOM">
             <EndProperty Name="USER">
               <ScalarProperty Name="UserId" ColumnName="ClassMasterId" />
             </EndProperty>
@@ -1504,7 +1502,7 @@
               <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="STUDENT_CLASSROOM" TypeName="SchoolModel.STUDENT_CLASSROOM" StoreEntitySet="STUDENT_CLASSROOM">
+          <AssociationSetMapping Name="STUDENT_CLASSROOM" TypeName="SchoolModel1.STUDENT_CLASSROOM" StoreEntitySet="STUDENT_CLASSROOM">
             <EndProperty Name="CLASSROOM">
               <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
             </EndProperty>
@@ -1512,7 +1510,7 @@
               <ScalarProperty Name="UserId" ColumnName="StudentId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="SUBJECT_TEACHER" TypeName="SchoolModel.SUBJECT_TEACHER" StoreEntitySet="SUBJECT_TEACHER">
+          <AssociationSetMapping Name="SUBJECT_TEACHER" TypeName="SchoolModel1.SUBJECT_TEACHER" StoreEntitySet="SUBJECT_TEACHER">
             <EndProperty Name="SUBJECT">
               <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
             </EndProperty>
@@ -1520,7 +1518,7 @@
               <ScalarProperty Name="UserId" ColumnName="TeacherId" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="TEACHER_CLASSROOM" TypeName="SchoolModel.TEACHER_CLASSROOM" StoreEntitySet="TEACHER_CLASSROOM">
+          <AssociationSetMapping Name="TEACHER_CLASSROOM" TypeName="SchoolModel1.TEACHER_CLASSROOM" StoreEntitySet="TEACHER_CLASSROOM">
             <EndProperty Name="CLASSROOM">
               <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
             </EndProperty>
@@ -1528,33 +1526,33 @@
               <ScalarProperty Name="UserId" ColumnName="TeacherId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="AddAbsence" FunctionName="SchoolModel.Store.AddAbsence" />
-          <FunctionImportMapping FunctionImportName="AddClassMasterClassroomLink" FunctionName="SchoolModel.Store.AddClassMasterClassroomLink" />
-          <FunctionImportMapping FunctionImportName="AddClassroom" FunctionName="SchoolModel.Store.AddClassroom" />
-          <FunctionImportMapping FunctionImportName="AddMark" FunctionName="SchoolModel.Store.AddMark" />
-          <FunctionImportMapping FunctionImportName="AddSpecialization" FunctionName="SchoolModel.Store.AddSpecialization" />
-          <FunctionImportMapping FunctionImportName="AddStudentClassroomLink" FunctionName="SchoolModel.Store.AddStudentClassroomLink" />
-          <FunctionImportMapping FunctionImportName="AddSubject" FunctionName="SchoolModel.Store.AddSubject" />
-          <FunctionImportMapping FunctionImportName="AddSubjectClassroomLink" FunctionName="SchoolModel.Store.AddSubjectClassroomLink" />
-          <FunctionImportMapping FunctionImportName="AddSubjectTeacherLink" FunctionName="SchoolModel.Store.AddSubjectTeacherLink" />
-          <FunctionImportMapping FunctionImportName="AddTeacherClassroomLink" FunctionName="SchoolModel.Store.AddTeacherClassroomLink" />
-          <FunctionImportMapping FunctionImportName="AddUser" FunctionName="SchoolModel.Store.AddUser" />
-          <FunctionImportMapping FunctionImportName="AddUserType" FunctionName="SchoolModel.Store.AddUserType" />
-          <FunctionImportMapping FunctionImportName="DeleteClassMasterClassroomLink" FunctionName="SchoolModel.Store.DeleteClassMasterClassroomLink" />
-          <FunctionImportMapping FunctionImportName="DeleteClassroom" FunctionName="SchoolModel.Store.DeleteClassroom" />
-          <FunctionImportMapping FunctionImportName="DeleteMark" FunctionName="SchoolModel.Store.DeleteMark" />
-          <FunctionImportMapping FunctionImportName="DeleteSpecialization" FunctionName="SchoolModel.Store.DeleteSpecialization" />
-          <FunctionImportMapping FunctionImportName="DeleteStudentClassroomLink" FunctionName="SchoolModel.Store.DeleteStudentClassroomLink" />
-          <FunctionImportMapping FunctionImportName="DeleteSubject" FunctionName="SchoolModel.Store.DeleteSubject" />
-          <FunctionImportMapping FunctionImportName="DeleteSubjectClassroomLink" FunctionName="SchoolModel.Store.DeleteSubjectClassroomLink" />
-          <FunctionImportMapping FunctionImportName="DeleteSubjectTeacherLink" FunctionName="SchoolModel.Store.DeleteSubjectTeacherLink" />
-          <FunctionImportMapping FunctionImportName="DeleteTeacherClassroomLink" FunctionName="SchoolModel.Store.DeleteTeacherClassroomLink" />
-          <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="SchoolModel.Store.DeleteUser" />
-          <FunctionImportMapping FunctionImportName="DeleteUserType" FunctionName="SchoolModel.Store.DeleteUserType" />
-          <FunctionImportMapping FunctionImportName="ExcuseAbsence" FunctionName="SchoolModel.Store.ExcuseAbsence" />
-          <FunctionImportMapping FunctionImportName="GetAbsencesForASubject" FunctionName="SchoolModel.Store.GetAbsencesForASubject">
+          <FunctionImportMapping FunctionImportName="AddAbsence" FunctionName="SchoolModel1.Store.AddAbsence" />
+          <FunctionImportMapping FunctionImportName="AddClassMasterClassroomLink" FunctionName="SchoolModel1.Store.AddClassMasterClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddClassroom" FunctionName="SchoolModel1.Store.AddClassroom" />
+          <FunctionImportMapping FunctionImportName="AddMark" FunctionName="SchoolModel1.Store.AddMark" />
+          <FunctionImportMapping FunctionImportName="AddSpecialization" FunctionName="SchoolModel1.Store.AddSpecialization" />
+          <FunctionImportMapping FunctionImportName="AddStudentClassroomLink" FunctionName="SchoolModel1.Store.AddStudentClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddSubject" FunctionName="SchoolModel1.Store.AddSubject" />
+          <FunctionImportMapping FunctionImportName="AddSubjectClassroomLink" FunctionName="SchoolModel1.Store.AddSubjectClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddSubjectTeacherLink" FunctionName="SchoolModel1.Store.AddSubjectTeacherLink" />
+          <FunctionImportMapping FunctionImportName="AddTeacherClassroomLink" FunctionName="SchoolModel1.Store.AddTeacherClassroomLink" />
+          <FunctionImportMapping FunctionImportName="AddUser" FunctionName="SchoolModel1.Store.AddUser" />
+          <FunctionImportMapping FunctionImportName="AddUserType" FunctionName="SchoolModel1.Store.AddUserType" />
+          <FunctionImportMapping FunctionImportName="DeleteClassMasterClassroomLink" FunctionName="SchoolModel1.Store.DeleteClassMasterClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteClassroom" FunctionName="SchoolModel1.Store.DeleteClassroom" />
+          <FunctionImportMapping FunctionImportName="DeleteMark" FunctionName="SchoolModel1.Store.DeleteMark" />
+          <FunctionImportMapping FunctionImportName="DeleteSpecialization" FunctionName="SchoolModel1.Store.DeleteSpecialization" />
+          <FunctionImportMapping FunctionImportName="DeleteStudentClassroomLink" FunctionName="SchoolModel1.Store.DeleteStudentClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteSubject" FunctionName="SchoolModel1.Store.DeleteSubject" />
+          <FunctionImportMapping FunctionImportName="DeleteSubjectClassroomLink" FunctionName="SchoolModel1.Store.DeleteSubjectClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteSubjectTeacherLink" FunctionName="SchoolModel1.Store.DeleteSubjectTeacherLink" />
+          <FunctionImportMapping FunctionImportName="DeleteTeacherClassroomLink" FunctionName="SchoolModel1.Store.DeleteTeacherClassroomLink" />
+          <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="SchoolModel1.Store.DeleteUser" />
+          <FunctionImportMapping FunctionImportName="DeleteUserType" FunctionName="SchoolModel1.Store.DeleteUserType" />
+          <FunctionImportMapping FunctionImportName="ExcuseAbsence" FunctionName="SchoolModel1.Store.ExcuseAbsence" />
+          <FunctionImportMapping FunctionImportName="GetAbsencesForASubject" FunctionName="SchoolModel1.Store.GetAbsencesForASubject">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAbsencesForASubject_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAbsencesForASubject_Result">
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1566,9 +1564,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAbsencesForStudentForSubject" FunctionName="SchoolModel.Store.GetAbsencesForStudentForSubject">
+          <FunctionImportMapping FunctionImportName="GetAbsencesForStudentForSubject" FunctionName="SchoolModel1.Store.GetAbsencesForStudentForSubject">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAbsencesForStudentForSubject_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAbsencesForStudentForSubject_Result">
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1580,9 +1578,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAbsencesPerClassroom" FunctionName="SchoolModel.Store.GetAbsencesPerClassroom">
+          <FunctionImportMapping FunctionImportName="GetAbsencesPerClassroom" FunctionName="SchoolModel1.Store.GetAbsencesPerClassroom">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAbsencesPerClassroom_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAbsencesPerClassroom_Result">
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1594,9 +1592,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllAbsencesForStudent" FunctionName="SchoolModel.Store.GetAllAbsencesForStudent">
+          <FunctionImportMapping FunctionImportName="GetAllAbsencesForStudent" FunctionName="SchoolModel1.Store.GetAllAbsencesForStudent">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllAbsencesForStudent_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllAbsencesForStudent_Result">
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1608,17 +1606,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllClassMasterClassroomLinks" FunctionName="SchoolModel.Store.GetAllClassMasterClassroomLinks">
+          <FunctionImportMapping FunctionImportName="GetAllClassMasterClassroomLinks" FunctionName="SchoolModel1.Store.GetAllClassMasterClassroomLinks">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllClassMasterClassroomLinks_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllClassMasterClassroomLinks_Result">
                 <ScalarProperty Name="ClassMasterId" ColumnName="ClassMasterId" />
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllClassrooms" FunctionName="SchoolModel.Store.GetAllClassrooms">
+          <FunctionImportMapping FunctionImportName="GetAllClassrooms" FunctionName="SchoolModel1.Store.GetAllClassrooms">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllClassrooms_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllClassrooms_Result">
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
                 <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
@@ -1626,9 +1624,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllMarks" FunctionName="SchoolModel.Store.GetAllMarks">
+          <FunctionImportMapping FunctionImportName="GetAllMarks" FunctionName="SchoolModel1.Store.GetAllMarks">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllMarks_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllMarks_Result">
                 <ScalarProperty Name="MarkId" ColumnName="MarkId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -1639,58 +1637,58 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllSpecializations" FunctionName="SchoolModel.Store.GetAllSpecializations">
+          <FunctionImportMapping FunctionImportName="GetAllSpecializations" FunctionName="SchoolModel1.Store.GetAllSpecializations">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllSpecializations_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllSpecializations_Result">
                 <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllStudentClassroomLinks" FunctionName="SchoolModel.Store.GetAllStudentClassroomLinks">
+          <FunctionImportMapping FunctionImportName="GetAllStudentClassroomLinks" FunctionName="SchoolModel1.Store.GetAllStudentClassroomLinks">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllStudentClassroomLinks_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllStudentClassroomLinks_Result">
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllSubjectClassroomLinks" FunctionName="SchoolModel.Store.GetAllSubjectClassroomLinks">
+          <FunctionImportMapping FunctionImportName="GetAllSubjectClassroomLinks" FunctionName="SchoolModel1.Store.GetAllSubjectClassroomLinks">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllSubjectClassroomLinks_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllSubjectClassroomLinks_Result">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
                 <ScalarProperty Name="Thesis" ColumnName="Thesis" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllSubjects" FunctionName="SchoolModel.Store.GetAllSubjects">
+          <FunctionImportMapping FunctionImportName="GetAllSubjects" FunctionName="SchoolModel1.Store.GetAllSubjects">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllSubjects_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllSubjects_Result">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllSubjectTeacherLinks" FunctionName="SchoolModel.Store.GetAllSubjectTeacherLinks">
+          <FunctionImportMapping FunctionImportName="GetAllSubjectTeacherLinks" FunctionName="SchoolModel1.Store.GetAllSubjectTeacherLinks">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllSubjectTeacherLinks_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllSubjectTeacherLinks_Result">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllTeacherClassroomLinks" FunctionName="SchoolModel.Store.GetAllTeacherClassroomLinks">
+          <FunctionImportMapping FunctionImportName="GetAllTeacherClassroomLinks" FunctionName="SchoolModel1.Store.GetAllTeacherClassroomLinks">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllTeacherClassroomLinks_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllTeacherClassroomLinks_Result">
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="SchoolModel.Store.GetAllUsers">
+          <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="SchoolModel1.Store.GetAllUsers">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllUsers_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllUsers_Result">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -1699,17 +1697,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllUserTypes" FunctionName="SchoolModel.Store.GetAllUserTypes">
+          <FunctionImportMapping FunctionImportName="GetAllUserTypes" FunctionName="SchoolModel1.Store.GetAllUserTypes">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAllUserTypes_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAllUserTypes_Result">
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAveragesForStudent" FunctionName="SchoolModel.Store.GetAveragesForStudent">
+          <FunctionImportMapping FunctionImportName="GetAveragesForStudent" FunctionName="SchoolModel1.Store.GetAveragesForStudent">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetAveragesForStudent_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetAveragesForStudent_Result">
                 <ScalarProperty Name="AverageId" ColumnName="AverageId" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
@@ -1719,9 +1717,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetClassMasterClassroom" FunctionName="SchoolModel.Store.GetClassMasterClassroom">
+          <FunctionImportMapping FunctionImportName="GetClassMasterClassroom" FunctionName="SchoolModel1.Store.GetClassMasterClassroom">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetClassMasterClassroom_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetClassMasterClassroom_Result">
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
                 <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
@@ -1731,10 +1729,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetClassroomIdForStudent" FunctionName="SchoolModel.Store.GetClassroomIdForStudent" />
-          <FunctionImportMapping FunctionImportName="GetMarksForASubject" FunctionName="SchoolModel.Store.GetMarksForASubject">
+          <FunctionImportMapping FunctionImportName="GetClassroomIdForStudent" FunctionName="SchoolModel1.Store.GetClassroomIdForStudent" />
+          <FunctionImportMapping FunctionImportName="GetMarksForASubject" FunctionName="SchoolModel1.Store.GetMarksForASubject">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetMarksForASubject_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetMarksForASubject_Result">
                 <ScalarProperty Name="MarkId" ColumnName="MarkId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -1746,9 +1744,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetMarksForStudent" FunctionName="SchoolModel.Store.GetMarksForStudent">
+          <FunctionImportMapping FunctionImportName="GetMarksForStudent" FunctionName="SchoolModel1.Store.GetMarksForStudent">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetMarksForStudent_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetMarksForStudent_Result">
                 <ScalarProperty Name="MarkId" ColumnName="MarkId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -1760,9 +1758,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetStudentsFromClassroom" FunctionName="SchoolModel.Store.GetStudentsFromClassroom">
+          <FunctionImportMapping FunctionImportName="GetStudentsFromClassroom" FunctionName="SchoolModel1.Store.GetStudentsFromClassroom">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetStudentsFromClassroom_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetStudentsFromClassroom_Result">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -1773,18 +1771,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetSubjectsForTeacherForSelectedClassroom" FunctionName="SchoolModel.Store.GetSubjectsForTeacherForSelectedClassroom">
+          <FunctionImportMapping FunctionImportName="GetSubjectsForTeacherForSelectedClassroom" FunctionName="SchoolModel1.Store.GetSubjectsForTeacherForSelectedClassroom">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetSubjectsForTeacherForSelectedClassroom_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetSubjectsForTeacherForSelectedClassroom_Result">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Thesis" ColumnName="Thesis" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetSubjectsFromClassroom" FunctionName="SchoolModel.Store.GetSubjectsFromClassroom">
+          <FunctionImportMapping FunctionImportName="GetSubjectsFromClassroom" FunctionName="SchoolModel1.Store.GetSubjectsFromClassroom">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetSubjectsFromClassroom_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetSubjectsFromClassroom_Result">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="SubjectId1" ColumnName="SubjectId1" />
@@ -1797,21 +1795,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetTeachersClassrooms" FunctionName="SchoolModel.Store.GetTeachersClassrooms">
+          <FunctionImportMapping FunctionImportName="GetTeachersClassrooms" FunctionName="SchoolModel1.Store.GetTeachersClassrooms">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetTeachersClassrooms_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetTeachersClassrooms_Result">
                 <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
                 <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="ClassroomId1" ColumnName="ClassroomId1" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUnexcusedAbsencesForStudent" FunctionName="SchoolModel.Store.GetUnexcusedAbsencesForStudent">
+          <FunctionImportMapping FunctionImportName="GetUnexcusedAbsencesForStudent" FunctionName="SchoolModel1.Store.GetUnexcusedAbsencesForStudent">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetUnexcusedAbsencesForStudent_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetUnexcusedAbsencesForStudent_Result">
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1823,9 +1819,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUnexcusedAbsencesPerClassroom" FunctionName="SchoolModel.Store.GetUnexcusedAbsencesPerClassroom">
+          <FunctionImportMapping FunctionImportName="GetUnexcusedAbsencesPerClassroom" FunctionName="SchoolModel1.Store.GetUnexcusedAbsencesPerClassroom">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetUnexcusedAbsencesPerClassroom_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetUnexcusedAbsencesPerClassroom_Result">
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1837,9 +1833,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUser" FunctionName="SchoolModel.Store.GetUser">
+          <FunctionImportMapping FunctionImportName="GetUser" FunctionName="SchoolModel1.Store.GetUser">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SchoolModel.GetUser_Result">
+              <ComplexTypeMapping TypeName="SchoolModel1.GetUser_Result">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -1848,15 +1844,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUserType" FunctionName="SchoolModel.Store.GetUserType" />
-          <FunctionImportMapping FunctionImportName="MakeAverage" FunctionName="SchoolModel.Store.MakeAverage" />
-          <FunctionImportMapping FunctionImportName="ModifyClassMasterClassroomLink" FunctionName="SchoolModel.Store.ModifyClassMasterClassroomLink" />
-          <FunctionImportMapping FunctionImportName="ModifyClassroom" FunctionName="SchoolModel.Store.ModifyClassroom" />
-          <FunctionImportMapping FunctionImportName="ModifySpecialization" FunctionName="SchoolModel.Store.ModifySpecialization" />
-          <FunctionImportMapping FunctionImportName="ModifyStudentClassroomLink" FunctionName="SchoolModel.Store.ModifyStudentClassroomLink" />
-          <FunctionImportMapping FunctionImportName="ModifySubject" FunctionName="SchoolModel.Store.ModifySubject" />
-          <FunctionImportMapping FunctionImportName="ModifyUser" FunctionName="SchoolModel.Store.ModifyUser" />
-          <FunctionImportMapping FunctionImportName="ModifyUserType" FunctionName="SchoolModel.Store.ModifyUserType" />
+          <FunctionImportMapping FunctionImportName="GetUserType" FunctionName="SchoolModel1.Store.GetUserType" />
+          <FunctionImportMapping FunctionImportName="MakeAverage" FunctionName="SchoolModel1.Store.MakeAverage" />
+          <FunctionImportMapping FunctionImportName="ModifyClassMasterClassroomLink" FunctionName="SchoolModel1.Store.ModifyClassMasterClassroomLink" />
+          <FunctionImportMapping FunctionImportName="ModifyClassroom" FunctionName="SchoolModel1.Store.ModifyClassroom" />
+          <FunctionImportMapping FunctionImportName="ModifySpecialization" FunctionName="SchoolModel1.Store.ModifySpecialization" />
+          <FunctionImportMapping FunctionImportName="ModifyStudentClassroomLink" FunctionName="SchoolModel1.Store.ModifyStudentClassroomLink" />
+          <FunctionImportMapping FunctionImportName="ModifySubject" FunctionName="SchoolModel1.Store.ModifySubject" />
+          <FunctionImportMapping FunctionImportName="ModifyUser" FunctionName="SchoolModel1.Store.ModifyUser" />
+          <FunctionImportMapping FunctionImportName="ModifyUserType" FunctionName="SchoolModel1.Store.ModifyUserType" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

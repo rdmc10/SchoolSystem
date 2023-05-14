@@ -14,7 +14,7 @@ namespace mvp3.ViewModel
 {
     public class EditClassroomVM : BaseVM
     {
-        private SchoolEntities3 context = new SchoolEntities3();
+        private SchoolEntities4 context = new SchoolEntities4();
         public ObservableCollection<CLASSROOM> Classrooms { get; set; }
         public ObservableCollection<SUBJECT> Subjects { get; set; }
 
