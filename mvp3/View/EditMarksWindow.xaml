@@ -16,6 +16,7 @@
                 <DataGridTextColumn Header="Value" Binding="{Binding Value}" />
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}" />
+                <DataGridTextColumn Header="Thesis" Binding="{Binding IsThesis}" />
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Value" HorizontalAlignment="Left" Margin="440,64,0,0" VerticalAlignment="Top"/>
@@ -25,6 +26,11 @@
         <CheckBox Content="Is thesis" IsChecked="{Binding IsThesis}" HorizontalAlignment="Left" Margin="441,0,0,0" VerticalAlignment="Center"/>
         <Rectangle HorizontalAlignment="Left" Height="260" Margin="412,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="284"/>
         <Button Content="Add" Command="{Binding AddMarkCommand}" HorizontalAlignment="Left" Margin="441,285,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding HeaderString}" HorizontalAlignment="Left" Margin="31,30,0,0" VerticalAlignment="Top"/>
+        <ComboBox SelectedValue="{Binding Semester, Mode=TwoWay}" Margin="440,248,246,167">
+            <ComboBoxItem Content="0" />
+            <ComboBoxItem Content="1" />
+        </ComboBox>
 
     </Grid>
 </Window>

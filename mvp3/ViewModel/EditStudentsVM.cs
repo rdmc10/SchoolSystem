@@ -19,7 +19,6 @@ namespace mvp3.ViewModel
     {
         private SchoolEntities4 context = new SchoolEntities4();
         public ObservableCollection<USER> Students { get; set; }
-
         public ObservableCollection<CLASSROOM> Classrooms { get; set; }
 
         private USER selectedUser;
@@ -67,10 +66,8 @@ namespace mvp3.ViewModel
 
         private void AssignUserClassroom()
         {
-            if(SelectedUser.UserId != 0)
-            {
-                context.AddStudentClassroomLink(SelectedUser.UserId, SelectedClassroom.ClassroomId);
-            }
+            LoadStudents();
+            context.AddStudentClassroomLink(SelectedUser.UserId, SelectedClassroom.ClassroomId);
         }
 
         public ICommand ModifyUserClassroomCommand => new RelayCommand(ModifyUserClassroom);
@@ -90,16 +87,17 @@ namespace mvp3.ViewModel
                 string password = username + "123";
                 int typeId = 1;
 
-                USER newUser = new USER()
+                USER newUser= new USER()
                 {
                     Name = Name,
-                    Password = password,
                     Username = username,
+                    Password = password,
                     UserTypeId = typeId
                 };
-
+                int generatedId;
+                context.AddUser(Name, username, password, typeId, out generatedId);
+                newUser.UserId = generatedId;
                 Students.Add(newUser);
-                context.AddUser(Name, username, password, typeId);
             }
             else
             {

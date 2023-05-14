@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,12 +90,14 @@ namespace mvp3.ViewModel
                 USER newUser = new USER()
                 {
                     Name = Name,
-                    Password = password,
                     Username = username,
+                    Password = password,
                     UserTypeId = typeId
                 };
+                int generatedId;
+                context.AddUser(Name, username, password, typeId, out generatedId);
+                newUser.UserId = generatedId;
 
-                context.AddUser(SelectedTeacher.Name, username, password, typeId);
             }
         }
 
@@ -132,13 +135,15 @@ namespace mvp3.ViewModel
                 USER newUser = new USER()
                 {
                     Name = Name,
-                    Password = password,
                     Username = username,
+                    Password = password,
                     UserTypeId = typeId
                 };
 
+                int generatedId;
+                context.AddUser(Name, username, password, typeId, out generatedId);
+                newUser.UserId = generatedId;
                 Teachers.Add(newUser);
-                context.AddUser(Name, username, password, typeId);
             }
             else
             {

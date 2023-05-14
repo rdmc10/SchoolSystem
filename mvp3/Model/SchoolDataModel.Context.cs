@@ -14,7 +14,9 @@ namespace mvp3.Model
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Data.SqlClient;
+    using System.Data;
+
     public partial class SchoolEntities4 : DbContext
     {
         public SchoolEntities4()
@@ -202,28 +204,27 @@ namespace mvp3.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddTeacherClassroomLink", teacherIdParameter, classroomIdParameter);
         }
-    
-        public virtual int AddUser(string name, string username, string password, Nullable<int> typeId)
+
+        public virtual int AddUser(string name, string username, string password, Nullable<int> typeId, out int userId)
         {
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
-    
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            var typeIdParameter = typeId.HasValue ?
-                new ObjectParameter("typeId", typeId) :
-                new ObjectParameter("typeId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", nameParameter, usernameParameter, passwordParameter, typeIdParameter);
+            var nameParameter = new SqlParameter("@name", name ?? (object)DBNull.Value);
+            var usernameParameter = new SqlParameter("@username", username ?? (object)DBNull.Value);
+            var passwordParameter = new SqlParameter("@password", password ?? (object)DBNull.Value);
+            var typeIdParameter = new SqlParameter("@typeId", typeId ?? (object)DBNull.Value);
+            var userIdParameter = new SqlParameter
+            {
+                ParameterName = "@userId",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
+            };
+
+            Database.SqlQuery<object>("EXEC AddUser @name, @username, @password, @typeId, @userId OUTPUT",
+                nameParameter, usernameParameter, passwordParameter, typeIdParameter, userIdParameter).SingleOrDefault();
+
+            userId = (int)userIdParameter.Value;
+
+            return userId;
         }
-    
         public virtual int AddUserType(string name)
         {
             var nameParameter = name != null ?

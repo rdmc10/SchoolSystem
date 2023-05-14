@@ -70,6 +70,14 @@ namespace mvp3.ViewModel
                 NotifyPropertyChanged(nameof(Value));
             }
         }
+
+        public ICommand DeleteMarkCommand => new RelayCommand(DeleteMark);
+        private void DeleteMark()
+        {
+            context.DeleteMark(SelectedMark.MarkId);
+            Marks.Remove(SelectedMark);
+            SelectedMark = null;
+        }
         public ICommand AddMarkCommand => new RelayCommand(AddMark);
         private void AddMark()
         {
@@ -79,13 +87,23 @@ namespace mvp3.ViewModel
                 SubjectId = Subject.SubjectId,
                 Value = Value,
                 Date = SelectedDate.ToString(),
-                Semester = 1,
+                Semester = Semester,
                 StudentId = Student.UserId,
                 IsThesis = IsThesis.ToString()
             };
             Marks.Add(mark);
         }
-        
+
+        private int semester;
+        public int Semester
+        {
+            get { return semester; }
+            set
+            {
+                semester = value;
+                NotifyPropertyChanged(nameof(Semester));
+            }
+        }
 
         private void LoadMarks()
         {
