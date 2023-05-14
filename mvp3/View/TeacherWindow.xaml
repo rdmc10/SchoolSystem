@@ -20,7 +20,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Marks" Command="{Binding StartMarksCommand}" HorizontalAlignment="Left" Margin="417,111,0,0" VerticalAlignment="Top"/>
-        <Button Content="Absences" HorizontalAlignment="Left" Margin="417,150,0,0" VerticalAlignment="Top"/>
+        <Button Content="Absences" Command="{Binding StartAbsencesCommand}" HorizontalAlignment="Left" Margin="417,150,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -115,6 +115,14 @@ namespace mvp3.ViewModel
             emw.DataContext = emvm;
             emw.ShowDialog();
         }
+        public ICommand StartAbsencesCommand => new RelayCommand(StartAbsences);
+        private void StartAbsences()
+        {
+            EditAbsencesVM eavm = new EditAbsencesVM(SelectedSubject, SelectedStudent);
+            EditAbsencesWindow eaw = new EditAbsencesWindow();
+            eaw.DataContext = eavm;
+            eaw.ShowDialog();
+        }
 
         public void LoadClassrooms()
         {
