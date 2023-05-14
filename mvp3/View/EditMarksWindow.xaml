@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:mvp3.View"
         xmlns:vm="clr-namespace:mvp3.ViewModel"
         mc:Ignorable="d"
-        Title="EditMarksWindow" Height="450" Width="800">
+        Title="EditMarksWindow" Height="466" Width="800">
     <Window.DataContext>
         <vm:EditMarksVM/>
     </Window.DataContext>
@@ -31,6 +31,9 @@
         </ComboBox>
         <Button Content="Delete mark" Command="{Binding DeleteMarkCommand}" HorizontalAlignment="Left" Margin="83,351,0,0" VerticalAlignment="Top"/>
         <Label Content="Semester" HorizontalAlignment="Left" Margin="441,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.564,0.259"/>
+        <Button Content="Calculate Average" Command="{Binding CalculateAverageCommand}" HorizontalAlignment="Left" Margin="255,351,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding FirstSemString}" HorizontalAlignment="Left" Margin="98,403,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.64,1.234"/>
+        <Label Content="{Binding SecSemString}" HorizontalAlignment="Left" Margin="400,403,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

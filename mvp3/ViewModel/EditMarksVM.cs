@@ -14,6 +14,8 @@ namespace mvp3.ViewModel
     public class EditMarksVM : BaseVM
     {
         public string HeaderString { get; set; }
+        private bool firstSemClosed = false;
+        private bool secSemClosed = false;
         public EditMarksVM() { }
         private SchoolEntities4 context = new SchoolEntities4();
         public ObservableCollection<int> SemesterOptions { get; set; }
@@ -28,6 +30,8 @@ namespace mvp3.ViewModel
             Subject = subject;
             LoadMarks();
             HeaderString = Student.Name + "'s marks for " + Subject.Name;
+            GetFirtSemAvg();
+            GetSecSemAvg();
         }
 
 
@@ -39,6 +43,28 @@ namespace mvp3.ViewModel
             {
                 selectedMark = value;
                 NotifyPropertyChanged(nameof(SelectedMark));
+            }
+        }
+
+        private string secsemstring;
+        public string SecSemString
+        {
+            get { return secsemstring; }
+            set
+            {
+                secsemstring = value;
+                NotifyPropertyChanged(nameof(SecSemString));
+            }
+        }
+
+        private string firstsemstring;
+        public string FirstSemString
+        {
+            get { return firstsemstring; }
+            set
+            {
+                firstsemstring = value;
+                NotifyPropertyChanged(nameof(FirstSemString));
             }
         }
         private bool isThesis;
@@ -73,6 +99,49 @@ namespace mvp3.ViewModel
             }
         }
 
+        public ICommand CalculateAverageCommand => new RelayCommand(CalculateAverage);
+
+        private void CalculateAverage()
+        {
+            context.MakeAverage(Semester, Subject.SubjectId, Student.UserId);
+            if(Semester == 1)
+            {
+                var result = context.GetAveragesForStudent(Student.UserId);
+                var avg = result.FirstOrDefault(r => r.SubjectId == Subject.SubjectId && r.Semester == Semester);
+
+                FirstSemString = "Average for 1st sem: " + avg.Value.ToString();
+            }
+            if(Semester == 2)
+            {
+                var result = context.GetAveragesForStudent(Student.UserId);
+                var avg = result.FirstOrDefault(r => r.SubjectId == Subject.SubjectId && r.Semester == Semester);
+
+                SecSemString = "Average for 2nd sem: " + avg.Value.ToString();
+
+            }
+        }
+
+        private void GetFirtSemAvg()
+        {
+            var result = context.GetAveragesForStudent(Student.UserId);
+            var avg = result.FirstOrDefault(r => r.SubjectId == Subject.SubjectId && r.Semester == 1);
+            if (avg != null)
+            {
+                FirstSemString = "Average for 1st sem: " + avg.Value.ToString();
+                firstSemClosed = true;
+            }
+        }
+        private void GetSecSemAvg()
+        {
+            var result = context.GetAveragesForStudent(Student.UserId);
+            var avg = result.FirstOrDefault(r => r.SubjectId == Subject.SubjectId && r.Semester == 2);
+            if (avg != null)
+            {
+                SecSemString = "Average for 2nd sem: " + avg.Value.ToString();
+                secSemClosed = true;
+            }
+        }
+
         public ICommand DeleteMarkCommand => new RelayCommand(DeleteMark);
         private void DeleteMark()
         {
@@ -86,17 +155,20 @@ namespace mvp3.ViewModel
         public ICommand AddMarkCommand => new RelayCommand(AddMark);
         private void AddMark()
         {
-            context.AddMark(Subject.SubjectId, Value, SelectedDate.ToString(), 1, Student.UserId, IsThesis);
-            MARK mark = new MARK()
+            if((Semester == 1 && !firstSemClosed) || (Semester == 2 && !secSemClosed) )
             {
-                SubjectId = Subject.SubjectId,
-                Value = Value,
-                Date = SelectedDate.ToString(),
-                Semester = Semester,
-                StudentId = Student.UserId,
-                IsThesis = IsThesis.ToString()
-            };
-            Marks.Add(mark);
+                context.AddMark(Subject.SubjectId, Value, SelectedDate.ToString(), Semester, Student.UserId, IsThesis);
+                MARK mark = new MARK()
+                {
+                    SubjectId = Subject.SubjectId,
+                    Value = Value,
+                    Date = SelectedDate.ToString(),
+                    Semester = Semester,
+                    StudentId = Student.UserId,
+                    IsThesis = IsThesis.ToString()
+                };
+                Marks.Add(mark);
+            }
         }
 
         private int semester;
