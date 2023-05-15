@@ -98,9 +98,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SchoolDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ClassMasterVM.cs" />
     <Compile Include="ViewModel\EditAbsencesVM.cs" />
     <Compile Include="ViewModel\EditMarksVM.cs" />
     <Compile Include="ViewModel\TeacherWindowVM.cs" />
+    <Compile Include="View\ClassMasterWindow.xaml.cs">
+      <DependentUpon>ClassMasterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditAbsencesWindow.xaml.cs">
       <DependentUpon>EditAbsencesWindow.xaml</DependentUpon>
     </Compile>
@@ -111,6 +115,10 @@
       <DependentUpon>TeacherWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClassMasterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

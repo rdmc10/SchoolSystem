@@ -91,6 +91,10 @@ namespace mvp3.ViewModel
                         teacherWindow.ShowDialog();
                         break;
                     case 3:
+                        ClassMasterVM cmvm = new ClassMasterVM(usr);
+                        ClassMasterWindow cmw = new ClassMasterWindow();
+                        cmw.DataContext = cmvm;
+                        cmw.ShowDialog();
                         break;
                     case 4:
                         AdminWindow adminWindow = new AdminWindow();

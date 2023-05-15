@@ -1316,8 +1316,6 @@
           <Property Type="Int32" Name="SpecializationId" Nullable="false" />
           <Property Type="Int32" Name="Year" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="ClassMasterId" Nullable="false" />
-          <Property Type="Int32" Name="ClassroomId1" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetMarksForASubject_Result">
           <Property Type="Int32" Name="MarkId" Nullable="false" />
@@ -1356,13 +1354,6 @@
         <ComplexType Name="GetSubjectsFromClassroom_Result">
           <Property Type="Int32" Name="SubjectId" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="SubjectId1" Nullable="false" />
-          <Property Type="Int32" Name="ClassroomId" Nullable="false" />
-          <Property Type="Boolean" Name="Thesis" Nullable="true" />
-          <Property Type="Int32" Name="ClassroomId1" Nullable="false" />
-          <Property Type="Int32" Name="SpecializationId" Nullable="false" />
-          <Property Type="Int32" Name="Year" Nullable="false" />
-          <Property Type="String" Name="Name1" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetTeachersClassrooms_Result">
           <Property Type="Int32" Name="ClassroomId" Nullable="false" />
@@ -1724,8 +1715,6 @@
                 <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ClassMasterId" ColumnName="ClassMasterId" />
-                <ScalarProperty Name="ClassroomId1" ColumnName="ClassroomId1" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1785,13 +1774,6 @@
               <ComplexTypeMapping TypeName="SchoolModel1.GetSubjectsFromClassroom_Result">
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="SubjectId1" ColumnName="SubjectId1" />
-                <ScalarProperty Name="ClassroomId" ColumnName="ClassroomId" />
-                <ScalarProperty Name="Thesis" ColumnName="Thesis" />
-                <ScalarProperty Name="ClassroomId1" ColumnName="ClassroomId1" />
-                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Name1" ColumnName="Name1" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

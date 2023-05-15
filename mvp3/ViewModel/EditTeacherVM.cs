@@ -79,7 +79,6 @@ namespace mvp3.ViewModel
 
         private void MakeClassmaster()
         {
-            context.AddClassMasterClassroomLink(SelectedTeacher.UserId, SelectedClassroom.ClassroomId);
 
             if (SelectedTeacher != null)
             {
@@ -97,7 +96,7 @@ namespace mvp3.ViewModel
                 int generatedId;
                 context.AddUser(Name, username, password, typeId, out generatedId);
                 newUser.UserId = generatedId;
-
+                context.AddClassMasterClassroomLink(generatedId, SelectedClassroom.ClassroomId);
             }
         }
 

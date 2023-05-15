@@ -15,12 +15,5 @@ namespace mvp3.Model
     {
         public int SubjectId { get; set; }
         public string Name { get; set; }
-        public int SubjectId1 { get; set; }
-        public int ClassroomId { get; set; }
-        public Nullable<bool> Thesis { get; set; }
-        public int ClassroomId1 { get; set; }
-        public int SpecializationId { get; set; }
-        public int Year { get; set; }
-        public string Name1 { get; set; }
     }
 }
