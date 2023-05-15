@@ -4,8 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using mvp3.Helpers;
 using mvp3.Model;
+using mvp3.View;
 
 namespace mvp3.ViewModel
 {
@@ -41,6 +44,16 @@ namespace mvp3.ViewModel
                 }
             }
         }
+
+        public ICommand ViewAbsencesCommand => new RelayCommand(ViewAbsences);
+
+        private void ViewAbsences()
+        {
+            EditAbsencesVM eavm = new EditAbsencesVM(SelectedSubject, SelectedStudent);
+            EditAbsencesWindow eaw = new EditAbsencesWindow();
+            eaw.DataContext = eavm;
+            eaw.ShowDialog();
+        }
         
         private CLASSROOM Classroom { get; set; }
         private USER Teacher { get; set; }
@@ -54,7 +67,9 @@ namespace mvp3.ViewModel
 
         private void GetClassroom()
         {
-            var result = context.GetClassMasterClassroom(Teacher.UserId);
+            var user = context.GetUser(Teacher.Username.Replace("dirig", "prof"), Teacher.Password).FirstOrDefault();
+
+            var result = context.GetClassMasterClassroom(user.UserId);
 
             var classroom = result.Select(r => new CLASSROOM
             {
