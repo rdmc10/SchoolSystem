@@ -14,7 +14,7 @@
         <Label Content="{Binding HeaderString}" HorizontalAlignment="Left" Margin="41,24,0,0" VerticalAlignment="Top"/>
         <DataGrid ItemsSource="{Binding Averages}"  IsReadOnly="True" AutoGenerateColumns="False" Margin="31,62,446,112">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Subject" Binding="{Binding SubjectId}" />
+                <DataGridTextColumn Header="Subject" Binding="{Binding SubjectName}" />
                 <DataGridTextColumn Header="Value" Binding="{Binding Value}" />
                 <DataGridTextColumn Header="Semester" Binding="{Binding Semester}" />
             </DataGrid.Columns>
