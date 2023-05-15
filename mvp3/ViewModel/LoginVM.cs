@@ -83,6 +83,10 @@ namespace mvp3.ViewModel
                 switch (usertype)
                 {
                     case 1:
+                        StudentWindow studentWindow = new StudentWindow();
+                        StudentWindowVM studentWindowVM = new StudentWindowVM(usr);
+                        studentWindow.DataContext = studentWindowVM;
+                        studentWindow.ShowDialog();
                         break;
                     case 2:
                         TeacherWindowVM twvm = new TeacherWindowVM(usr);

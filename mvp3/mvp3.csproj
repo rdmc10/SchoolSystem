@@ -102,6 +102,7 @@
     <Compile Include="ViewModel\ClassMasterVM.cs" />
     <Compile Include="ViewModel\EditAbsencesVM.cs" />
     <Compile Include="ViewModel\EditMarksVM.cs" />
+    <Compile Include="ViewModel\StudentWindowVM.cs" />
     <Compile Include="ViewModel\TeacherWindowVM.cs" />
     <Compile Include="View\AveragesWindow.xaml.cs">
       <DependentUpon>AveragesWindow.xaml</DependentUpon>
@@ -114,6 +115,9 @@
     </Compile>
     <Compile Include="View\EditMarksWindow.xaml.cs">
       <DependentUpon>EditMarksWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StudentWindow.xaml.cs">
+      <DependentUpon>StudentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TeacherWindow.xaml.cs">
       <DependentUpon>TeacherWindow.xaml</DependentUpon>
@@ -288,6 +292,10 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\StudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TeacherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
