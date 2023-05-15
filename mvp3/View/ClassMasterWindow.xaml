@@ -19,6 +19,9 @@
         <ComboBox  ItemsSource="{Binding Subjects}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedSubject}" SelectedValue="{Binding SelectedSubject.SubjectId}" SelectedValuePath="SubjectId" HorizontalAlignment="Left" Margin="417,64,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="{Binding HeaderString}" HorizontalAlignment="Left" Margin="62,21,0,0" VerticalAlignment="Top"/>
         <Button Content="View Absences" Command="{Binding ViewAbsencesCommand}" HorizontalAlignment="Left" Margin="417,117,0,0" VerticalAlignment="Top"/>
+        <Button Content="View Averages" Command="{Binding ViewAveragesCommand}"  HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Center"/>
+        <Rectangle HorizontalAlignment="Center" Height="0" Margin="0,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="0"/>
+        <Rectangle HorizontalAlignment="Left" Height="90" Margin="401,64,0,0" Stroke="Black" VerticalAlignment="Top" Width="176"/>
 
     </Grid>
 </Window>

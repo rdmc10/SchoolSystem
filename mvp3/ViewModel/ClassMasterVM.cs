@@ -45,6 +45,16 @@ namespace mvp3.ViewModel
             }
         }
 
+        public ICommand ViewAveragesCommand => new RelayCommand(ViewAverages);
+
+        private void ViewAverages()
+        {
+            AveragesWindowVM averagesWindowVM = new AveragesWindowVM(SelectedStudent);
+            AveragesWindow averagesWindow = new AveragesWindow();
+            averagesWindow.DataContext = averagesWindowVM;
+            averagesWindow.ShowDialog();
+        }
+
         public ICommand ViewAbsencesCommand => new RelayCommand(ViewAbsences);
 
         private void ViewAbsences()
@@ -67,9 +77,9 @@ namespace mvp3.ViewModel
 
         private void GetClassroom()
         {
-            var user = context.GetUser(Teacher.Username.Replace("dirig", "prof"), Teacher.Password).FirstOrDefault();
+            //var user = context.GetUser(Teacher.Username.Replace("dirig", "prof"), Teacher.Password).FirstOrDefault();
 
-            var result = context.GetClassMasterClassroom(user.UserId);
+            var result = context.GetClassMasterClassroom(Teacher.UserId);
 
             var classroom = result.Select(r => new CLASSROOM
             {

@@ -81,8 +81,8 @@ namespace mvp3.ViewModel
 
         private void ExcuseAbsence()
         {
-            Console.WriteLine(SelectedAbsence.AbsenceId.ToString());
             context.ExcuseAbsence(SelectedAbsence.AbsenceId);
+            selectedAbsence.Excused = true;
         }
 
         private void LoadAbsences()
