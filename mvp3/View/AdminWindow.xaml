@@ -11,9 +11,10 @@
         <vm:AdminWindowVM/>
     </Window.DataContext>
     <Grid>
-        <Button Content="Editare elevi" Command="{Binding EditStudentsCommand}" HorizontalAlignment="Left" Margin="72,30,0,0" VerticalAlignment="Top" Width="91"/>
-        <Button Content="Editare profesori" Command="{Binding EditTeachersCommand}" HorizontalAlignment="Left" Margin="72,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.949,1.601"/>
-        <Button Content="Gestionare clase" Command="{Binding EditClassroomsCommand}" HorizontalAlignment="Left" Margin="72,130,0,0" VerticalAlignment="Top"/>
+        <Button Content="Edit students" Command="{Binding EditStudentsCommand}" HorizontalAlignment="Left" Margin="72,30,0,0" VerticalAlignment="Top" Width="91"/>
+        <Button Content="Edit teachers" Command="{Binding EditTeachersCommand}" HorizontalAlignment="Left" Margin="72,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.949,1.601"/>
+        <Button Content="Edit classrooms" Command="{Binding EditClassroomsCommand}" HorizontalAlignment="Left" Margin="72,130,0,0" VerticalAlignment="Top"/>
+        <Button Content="Add classrooms" Command="{Binding AddClassroomsCommand}" HorizontalAlignment="Left" Margin="72,185,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

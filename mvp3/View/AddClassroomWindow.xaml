@@ -1,0 +1,28 @@
+﻿<Window x:Class="mvp3.View.AddClassroomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mvp3.View"
+        xmlns:vm="clr-namespace:mvp3.ViewModel"
+        mc:Ignorable="d"
+        Title="AddClassroomWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:AddClassroomVM/>
+    </Window.DataContext>
+    <Grid>
+        
+        <ComboBox  ItemsSource="{Binding Specializations}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedSpecialization}" SelectedValue="{Binding SelectedSpecialization.SpecializationId}" SelectedValuePath="SpecializationId" HorizontalAlignment="Left" Margin="47,69,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="458,60,0,0" TextWrapping="Wrap" Text="{Binding SpecName}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Specialization name" HorizontalAlignment="Left" Margin="458,25,0,0" VerticalAlignment="Top"/>
+        <Button Content="Add" Command="{Binding AddSpecCommand}" HorizontalAlignment="Left" Margin="498,95,0,0" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="86" Margin="427,32,0,0" Stroke="Black" VerticalAlignment="Top" Width="183"/>
+        <Label Content="Specialization" HorizontalAlignment="Left" Margin="47,33,0,0" VerticalAlignment="Top"/>
+        <Label Content="Classroom Name" HorizontalAlignment="Left" Margin="47,105,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.707,0.496"/>
+        <TextBox HorizontalAlignment="Left" Margin="47,136,0,0" TextWrapping="Wrap" Text="{Binding ClassroomName}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Year" HorizontalAlignment="Left" Margin="47,159,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="47,190,0,0" TextWrapping="Wrap" Text="{Binding Year}" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Add" Command="{Binding AddClassroomCommand}" HorizontalAlignment="Left" Margin="94,228,0,0" VerticalAlignment="Top"/>
+        <Rectangle HorizontalAlignment="Left" Height="232" Margin="21,38,0,0" Stroke="Black" VerticalAlignment="Top" Width="190"/>
+    </Grid>
+</Window>

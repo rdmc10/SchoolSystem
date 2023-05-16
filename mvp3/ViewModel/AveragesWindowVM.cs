@@ -89,9 +89,8 @@ namespace mvp3.ViewModel
 
         private string GetSubjectName(int subjectId)
         {
-            // Retrieve the subject name from the database based on the subjectId
             var subject = context.GetAllSubjects().FirstOrDefault(s => s.SubjectId == subjectId);
-            return subject?.Name ?? string.Empty; // Return the subject name or an empty string if not found
+            return subject?.Name ?? string.Empty; 
         }
     }
 }

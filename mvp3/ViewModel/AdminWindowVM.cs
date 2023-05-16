@@ -31,5 +31,13 @@ namespace mvp3.ViewModel
             editClassroomWindow.ShowDialog();
         }
 
+        public ICommand AddClassroomsCommand => new RelayCommand(AddClassrooms);
+
+        private void AddClassrooms()
+        {
+            AddClassroomWindow addClassroomWindow = new AddClassroomWindow();
+            addClassroomWindow.ShowDialog();
+        }
+
     }
 }
